@@ -5,6 +5,11 @@ target("geometry")
     set_kind("$(kind)")
 
     add_files("./**/*.cpp")
+
+    -- if is_mode("debug") then
+    --     add_files("./**/*.h")
+    -- end
+
     add_includedirs("src/", {public = true}) 
   
 --
