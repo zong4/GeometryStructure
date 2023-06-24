@@ -2,7 +2,6 @@
 
 #include <vector>
 
-#include "../util/math.h"
 #include "Point.h"
 
 namespace zong

@@ -2,6 +2,7 @@
 
 #include <algorithm>
 
+#include "../util/isEqual.h"
 #include "assistance/Vector.h"
 
 namespace zong
