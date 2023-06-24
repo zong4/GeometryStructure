@@ -2,18 +2,13 @@
 
 #include <algorithm>
 
-#include "../util/isEqual.h"
+#include "../util/math.h"
 #include "assistance/Vector.h"
 
 namespace zong
 {
 namespace geometry
 {
-
-// bool Segment::isEqual(Segment const& other, double const precision) const
-//{
-//     return this->first().isEqual(other.first(), precision) && this->second().isEqual(other.second(), precision);
-// }
 
 bool Segment::isEqual(Segment const& a, Segment const& b, double const precision)
 {

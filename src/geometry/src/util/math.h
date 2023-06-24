@@ -8,5 +8,25 @@ namespace util
 const double HIGH_EPS = 1e-12;
 const double EPS      = 1e-8;
 
+inline bool isEqual(int const a, int const b, int const precision)
+{
+    return a - b < precision && a - b > -precision;
+}
+
+inline bool isNotEqual(int const a, int const b, int const precision)
+{
+    return !isEqual(a, b, precision);
+}
+
+inline bool isEqual(double const a, double const b, double const precision)
+{
+    return a - b < precision && a - b > -precision;
+}
+
+inline bool isNotEqual(double const a, double const b, double const precision)
+{
+    return !isEqual(a, b, precision);
+}
+
 } // namespace util
 } // namespace zong
