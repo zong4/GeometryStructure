@@ -1,0 +1,13 @@
+# Xmake cache
+.xmake/
+build/
+
+# MacOS Cache
+.DS_Store
+
+# Visual Studio
+.vs/
+vsxmake2022/
+
+# Install cache
+install/
