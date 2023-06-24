@@ -5,9 +5,14 @@ build/
 # MacOS Cache
 .DS_Store
 
-# Visual Studio
+# Visual build
 .vs/
 vsxmake2022/
 
-# Install cache
+# Install build
 install/
+
+# Doxygen build
+html/
+latex/
+

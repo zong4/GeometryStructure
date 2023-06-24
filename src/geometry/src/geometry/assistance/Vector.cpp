@@ -1,5 +1,6 @@
 #include "Vector.h"
 
+#include "../../util/math.h"
 #include "../Point.h"
 
 namespace zong
@@ -25,11 +26,6 @@ Point Vector::operator+(Point const& other) const
 {
     return Point(x() + other.x(), y() + other.y());
 }
-
-// Point Vector::operator-(Point const& other) const
-//{
-//     return Point(x() - other.x(), y() - other.y());
-// }
 
 Vector Vector::normalize() const
 {

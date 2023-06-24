@@ -1,6 +1,7 @@
 #include "Point.h"
 
 #include "assistance/Vector.h"
+#include "util/math.h"
 
 namespace zong
 {
@@ -19,26 +20,6 @@ bool Point::isEqual(Point const& a, Point const& b, double const precision)
 bool Point::isNotEqual(Point const& a, Point const& b, double const precision)
 {
     return !Point::isEqual(a, b, precision);
-}
-
-Point Point::operator+(Point const& other) const
-{
-    return Point(x() + other.x(), y() + other.y());
-}
-
-Point Point::operator+(Vector const& other) const
-{
-    return Point(x() + other.x(), y() + other.y());
-}
-
-Vector Point::operator-(Point const& other) const
-{
-    return Vector(x() - other.x(), y() - other.y());
-}
-
-Point Point::operator-(Vector const& other) const
-{
-    return Point(x() - other.x(), y() - other.y());
 }
 
 } // namespace geometry

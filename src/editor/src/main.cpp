@@ -1,10 +1,15 @@
+/*! \mainpage Main page
+# 简介
+一些描述。
+# Quick Start
+一些使用说明。
+*/
 
 #include <iostream>
 #include <vector>
 
 #include "algorithm/boolean/sweep_line/SweepLine.h"
 #include "geometry/Segment.h"
-#include "geometry/assistance/Vector.h"
 
 int main()
 {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../util/math.h"
+#include "assistance/Vector.h"
 
 namespace zong
 {
@@ -9,11 +9,9 @@ namespace geometry
 
 class Vector;
 
-/**
- * \brief Point
- * \brief Jusr one point
- * \tparam double
- */
+/// <summary>
+/// just one double point
+/// </summary>
 class Point
 {
 private:
@@ -21,9 +19,16 @@ private:
     double _y;
 
 public:
-    // explicit, avoid non-explicit as same as Vector
-    // non-explicit, the basic operation as same as Vector assistance
-    explicit Point() : _x(0), _y(0) {}
+    /// <summary>
+    /// explicit constructor
+    /// </summary>
+    explicit Point() : _x(0.0), _y(0.0) {}
+
+    /// <summary>
+    /// explicit constructor
+    /// </summary>
+    /// <param name="x">x position</param>
+    /// <param name="y">y position</param>
     explicit Point(double const x, double const y) : _x(x), _y(y) {}
     // Point(Vector const& other);
     // copy-assignment
@@ -39,9 +44,12 @@ public:
     static bool isEqual(Point const& a, Point const& b, double const precision);    // Add precision
     static bool isNotEqual(Point const& a, Point const& b, double const precision); // Add precision
 
-    // zong give a explain
-    Point        operator+(Point const& other) const;
-    Point        operator+(Vector const& other) const;
+    /// <summary>
+    /// Point + Point = Point
+    /// </summary>
+    /// <param name="other">another Point</param>
+    /// <returns>Point</returns>
+    Point        operator+(Point const& other) const { return Point(x() + other.x(), y() + other.y()); }
     inline Point operator+=(Point const& other)
     {
         setX(x() + other.x());
@@ -49,14 +57,26 @@ public:
         return *this;
     }
 
-    Vector operator-(Point const& other) const;
-    Point  operator-(Vector const& other) const;
-    // inline Point operator-=(Point const& other)
-    //{
-    //     setX(x() - other.x());
-    //     setY(y() - other.y());
-    //     return *this;
-    // }
+    /// <summary>
+    /// Point + Vector = Point
+    /// </summary>
+    /// <param name="other">another Vector</param>
+    /// <returns>Point</returns>
+    Point operator+(Vector const& other) const { return Point(x() + other.x(), y() + other.y()); }
+
+    /// <summary>
+    /// Point - Point = Vector
+    /// </summary>
+    /// <param name="other">another Point</param>
+    /// <returns>Vector</returns>
+    Vector operator-(Point const& other) const { return Vector(x() - other.x(), y() - other.y()); }
+
+    /// <summary>
+    /// Point - Vector = Point
+    /// </summary>
+    /// <param name="other">another Vector</param>
+    /// <returns>Point</returns>
+    Point operator-(Vector const& other) const { return Point(x() - other.x(), y() - other.y()); }
 
     inline Point operator*(double const scale) const { return Point(x() * scale, y() * scale); }
     inline Point operator*=(double const scale)
