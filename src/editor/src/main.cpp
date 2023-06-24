@@ -9,10 +9,18 @@
 #include <vector>
 
 #include "algorithm/boolean/sweep_line/SweepLine.h"
+#include "common/log.h"
 #include "geometry/Segment.h"
 
 int main()
 {
+    zong::common::Log::init();
+    ZONG_CORE_TRACE("123");
+    ZONG_CORE_INFO("12");
+    ZONG_CORE_WARN("1");
+    ZONG_CORE_ERROR("12");
+    ZONG_CORE_CRITICAL("123");
+
     std::vector<zong::geometry::Segment> segments;
     segments.emplace_back(zong::geometry::Segment(zong::geometry::Point(0.0, 0.0), zong::geometry::Point(2.0, 2.0)));
     segments.emplace_back(zong::geometry::Segment(zong::geometry::Point(2.0, 0.0), zong::geometry::Point(0.0, 2.0)));

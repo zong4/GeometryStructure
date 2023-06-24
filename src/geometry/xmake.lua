@@ -1,16 +1,18 @@
 add_defines(GEOMETRY)
 
+add_requires("spdlog 1.11.0")
+
 target("geometry")
+    add_packages("spdlog", {public = true})
+
     add_rules("BuildLibrary")
     set_kind("$(kind)")
-
     add_files("./**/*.cpp")
+    add_includedirs("src/", {public = true}) 
 
     -- if is_mode("debug") then
     --     add_files("./**/*.h")
-    -- end
-
-    add_includedirs("src/", {public = true}) 
+    -- end    
   
 --
 -- If you want to known more usage about xmake, please see https://xmake.io

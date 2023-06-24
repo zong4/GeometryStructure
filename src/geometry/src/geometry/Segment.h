@@ -1,4 +1,3 @@
-/** @file Segment */
 #pragma once
 
 #include <vector>
