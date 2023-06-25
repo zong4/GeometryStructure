@@ -32,147 +32,71 @@ public:
 };
 
 } // namespace common
+} // namespace zong
 
 #ifdef DEBUG
-/// <summary>
-/// core log, basic information
-/// </summary>
-inline void CORE_TRACE(std::string const& msg)
-{
-    common::Log::coreLogger()->trace(msg);
-    return;
-}
 
-/// <summary>
-/// core log, need be optimized
-/// </summary>
-inline void CORE_INFO(std::string const& msg)
-{
-    common::Log::coreLogger()->info(msg);
-    return;
-}
+    /// <summary>
+    /// core log, basic information
+    /// </summary>
+    #define ZONG_CORE_TRACE(...) zong::common::Log::coreLogger()->trace(__VA_ARGS__)
 
-/// <summary>
-/// core log, need be controled by user
-/// </summary>
-inline void CORE_WARN(std::string const& msg)
-{
-    common::Log::coreLogger()->warn(msg);
-    return;
-}
+    /// <summary>
+    /// core log, need be optimized
+    /// </summary>
+    #define ZONG_CORE_INFO(...) zong::common::Log::coreLogger()->info(__VA_ARGS__)
 
-/// <summary>
-/// core log, error
-/// </summary>
-inline void CORE_ERROR(std::string const& msg)
-{
-    common::Log::coreLogger()->error(msg);
-    return;
-}
+    /// <summary>
+    /// core log, need be controled by user
+    /// </summary>
+    #define ZONG_CORE_WARN(...) zong::common::Log::coreLogger()->warn(__VA_ARGS__)
 
-/// <summary>
-/// core log, serious error
-/// </summary>
-inline void CORE_CRITICAL(std::string const& msg)
-{
-    common::Log::coreLogger()->critical(msg);
-    return;
-}
+    /// <summary>
+    /// core log, error
+    /// </summary>
+    #define ZONG_CORE_ERROR(...) zong::common::Log::coreLogger()->error(__VA_ARGS__)
 
-/// <summary>
-/// client log, basic information
-/// </summary>
-inline void CLIENT_TRACE(std::string const& msg)
-{
-    common::Log::clientLogger()->trace(msg);
-    return;
-}
+    /// <summary>
+    /// core log, serious error
+    /// </summary>
+    #define ZONG_CORE_CRITICAL(...) zong::common::Log::coreLogger()->critical(__VA_ARGS__)
 
-/// <summary>
-/// client log, need be optimized
-/// </summary>
-inline void CLIENT_INFO(std::string const& msg)
-{
-    common::Log::clientLogger()->info(msg);
-    return;
-}
+    /// <summary>
+    /// client log, basic information
+    /// </summary>
+    #define ZONG_TRACE(...) zong::common::Log::clientLogger()->trace(__VA_ARGS__)
 
-/// <summary>
-/// client log, need be controled by user
-/// </summary>
-inline void CLIENT_WARN(std::string const& msg)
-{
-    common::Log::clientLogger()->warn(msg);
-    return;
-}
+    /// <summary>
+    /// client log, need be optimized
+    /// </summary>
+    #define ZONG_INFO(...) zong::common::Log::clientLogger()->info(__VA_ARGS__)
 
-/// <summary>
-/// client log, error
-/// </summary>
-inline void CLIENT_ERROR(std::string const& msg)
-{
-    common::Log::clientLogger()->error(msg);
-    return;
-}
+    /// <summary>
+    /// client log, need be controled by user
+    /// </summary>
+    #define ZONG_WARN(...) zong::common::Log::clientLogger()->warn(__VA_ARGS__)
 
-/// <summary>
-/// client log, serious error
-/// </summary>
-inline void CLIENT_CRITICAL(std::string const& msg)
-{
-    common::Log::clientLogger()->critical(msg);
-    return;
-}
+    /// <summary>
+    /// client log, error
+    /// </summary>
+    #define ZONG_ERROR(...) zong::common::Log::clientLogger()->error(__VA_ARGS__)
+
+    /// <summary>
+    /// client log, serious error
+    /// </summary>
+    #define ZONG_CRITICAL(...) zong::common::Log::clientLogger()->critical(__VA_ARGS__)
 #elif RELEASE
-inline void CORE_TRACE(std::string const& msg)
-{
-    return;
-}
+  // core log macros
+    #define ZONG_CORE_TRACE(...)
+    #define ZONG_CORE_INFO(...)
+    #define ZONG_CORE_WARN(...)
+    #define ZONG_CORE_ERROR(...)
+    #define ZONG_CORE_CRITICAL(...)
 
-inline void CORE_INFO(std::string const& msg)
-{
-    return;
-}
-
-inline void CORE_WARN(std::string const& msg)
-{
-    return;
-}
-
-inline void CORE_ERROR(std::string const& msg)
-{
-    return;
-}
-
-inline void CORE_CRITICAL(std::string const& msg)
-{
-    return;
-}
-
-inline void CLIENT_TRACE(std::string const& msg)
-{
-    return;
-}
-
-inline void CLIENT_INFO(std::string const& msg)
-{
-    return;
-}
-
-inline void CLIENT_WARN(std::string const& msg)
-{
-    return;
-}
-
-inline void CLIENT_ERROR(std::string const& msg)
-{
-    return;
-}
-
-inline void CLIENT_CRITICAL(std::string const& msg)
-{
-    return;
-}
+    // client log macros
+    #define ZONG_TRACE(...)
+    #define ZONG_INFO(...)
+    #define ZONG_WARN(...)
+    #define ZONG_ERROR(...)
+    #define ZONG_CRITICAL(...)
 #endif
-
-} // namespace zong
