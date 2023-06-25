@@ -15,7 +15,7 @@ void Log::init()
 {
     if (_coreLogger || _clientLogger)
     {
-        ZONG_CORE_INFO("the log has been init");
+        CORE_INFO("the log has been init");
         return;
     }
 

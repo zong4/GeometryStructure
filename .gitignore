@@ -5,14 +5,14 @@ build/
 # MacOS Cache
 .DS_Store
 
-# Visual build
+# Visual cache
 .vs/
 vsxmake2022/
 
-# Install build
+# Xmake build
 install/
 
-# Doxygen build
+# Doxygen cache
+*.lnk
 html/
 latex/
-

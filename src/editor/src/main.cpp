@@ -15,11 +15,11 @@
 int main()
 {
     zong::common::Log::init();
-    ZONG_CORE_TRACE("123");
-    ZONG_CORE_INFO("12");
-    ZONG_CORE_WARN("1");
-    ZONG_CORE_ERROR("12");
-    ZONG_CORE_CRITICAL("123");
+    zong::CLIENT_TRACE("123");
+    zong::CLIENT_INFO("12");
+    zong::CLIENT_WARN("1");
+    zong::CLIENT_ERROR("12");
+    zong::CLIENT_CRITICAL("123");
 
     std::vector<zong::geometry::Segment> segments;
     segments.emplace_back(zong::geometry::Segment(zong::geometry::Point(0.0, 0.0), zong::geometry::Point(2.0, 2.0)));
