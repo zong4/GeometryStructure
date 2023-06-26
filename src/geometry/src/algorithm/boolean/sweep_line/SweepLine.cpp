@@ -2,6 +2,8 @@
 
 #include "../../../util/math.h"
 
+#include <algorithm>
+
 SweepLine::SweepLine(std::vector<zong::geometry::Segment>& segmentVec)
 {
     resetSegmentsPoints(segmentVec);
@@ -228,7 +230,7 @@ void SweepLine::scan()
             SegmentEvent tmpSegment2d(pointEvent, *(pointEvent.otherEvent()));
             _segmentTree.emplace_back(tmpSegment2d);
 
-            sort(_segmentTree.begin(), _segmentTree.end(), [](SegmentEvent& a, SegmentEvent& b) -> bool {
+            std::sort(_segmentTree.begin(), _segmentTree.end(), [](SegmentEvent& a, SegmentEvent& b) -> bool {
                 // SweepLineCrossPoint.x 肯定一样
                 if (!IS_FLOAT_EQUAL(a.sweepLineCrossPoint().y(), b.sweepLineCrossPoint().y()))
                     return a.sweepLineCrossPoint().y() < b.sweepLineCrossPoint().y();
