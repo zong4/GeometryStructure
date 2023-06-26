@@ -1,14 +1,11 @@
 add_defines("EDITOR")
 
 target("editor")
-    set_kind("binary")
-
     -- link other project firstly
     add_deps("geometry")
 
+    set_kind("binary")
     add_files("src/main.cpp")
-    
-
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io

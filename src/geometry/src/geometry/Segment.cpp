@@ -2,17 +2,10 @@
 
 #include <algorithm>
 
-#include "assistance/Vector.h"
-
 namespace zong
 {
 namespace geometry
 {
-
-// bool Segment::isEqual(Segment const& other, double const precision) const
-//{
-//     return this->first().isEqual(other.first(), precision) && this->second().isEqual(other.second(), precision);
-// }
 
 bool Segment::isEqual(Segment const& a, Segment const& b, double const precision)
 {
@@ -26,6 +19,13 @@ bool Segment::isNotEqual(Segment const& a, Segment const& b, double const precis
 
 SegmentIntersectionState Segment::isIntersection(Segment const& other, double const precision) const
 {
+    if (!isVaild(precision))
+    {
+        // TODO: warning
+        return SegmentIntersectionState::Unknown;
+    }
+
+    // TODO: add box class
     // box intersection
     if ((std::min(other.first().x(), other.second().x()) - std::max(this->first().x(), this->second().x())) > precision ||
         (std::min(this->first().x(), this->second().x()) - std::max(other.first().x(), other.second().x())) > precision ||
@@ -39,15 +39,14 @@ SegmentIntersectionState Segment::isIntersection(Segment const& other, double co
     Vector const thisNomVec((this->first() - this->second()).normalize());
     Vector const otherNomVec((other.first() - other.second()).normalize());
 
-    // zong need change, if cross answer is 0, can't normalize
     // sorry, can't give suitable name
     double const a1 = thisNomVec.cross(Vector((other.first() - this->second()).normalize()));
     double const a2 = thisNomVec.cross(Vector((other.second() - this->second()).normalize()));
     double const b1 = otherNomVec.cross(Vector((this->first() - other.second()).normalize()));
     double const b2 = otherNomVec.cross(Vector((this->second() - other.second()).normalize()));
-    if (a1 * a2 >= precision || b1 * b2 >= precision)
+    if (util::isGreater(a1 * a2, 0.0, precision) || util::isGreater(b1 * b2, 0.0, precision))
         return SegmentIntersectionState::Separate;
-    else if (a1 * a2 <= -precision || b1 * b2 <= -precision)
+    else if (util::isLess(a1 * a2, 0.0, precision) || util::isLess(b1 * b2, 0.0, precision))
         return SegmentIntersectionState::Intersection;
 
     return SegmentIntersectionState::Overlap;
@@ -56,13 +55,11 @@ SegmentIntersectionState Segment::isIntersection(Segment const& other, double co
 std::vector<Point> Segment::intersection(Segment const& other, double const precision) const
 {
     SegmentIntersectionState const state = this->isIntersection(other, precision);
-    if (state == SegmentIntersectionState::Separate)
+    if (state == SegmentIntersectionState::Unknown || state == SegmentIntersectionState::Separate)
         return {};
 
     if (state == SegmentIntersectionState::Overlap)
     {
-        std::vector<Point> crossPoints(0);
-
         std::vector<Point> points(4);
         points[0] = this->first();
         points[1] = this->second();
@@ -76,13 +73,25 @@ std::vector<Point> Segment::intersection(Segment const& other, double const prec
                 return a.y() < b.y();
         });
 
-        if (Point::isEqual(points[0], points[1], precision))
+        if (Point::isEqual(points[1], points[2], precision))
+            return {(points[1] + points[2]) * 0.5}; // TODO: * 0.5 is meaningful?
+        else
         {
-            crossPoints.emplace_back(points[0] + points[1]);
+            std::vector<Point> crossPoints(2);
+            if (Point::isEqual(points[0], points[1], precision))
+                crossPoints[0] = ((points[0] + points[1]) * 0.5); // TODO: * 0.5 is meaningful?
+            else
+                crossPoints[0] = (points[1]);
+
+            if (Point::isEqual(points[2], points[3], precision))
+                crossPoints[1] = ((points[2] + points[3]) * 0.5); // TODO: * 0.5 is meaningful?
+            else
+                crossPoints[1] = (points[2]);
+
+            return crossPoints;
         }
     }
-
-    // intersection
+    else // intersection
     {
         Vector const base           = this->first() - this->second();
         double const firstDistance  = fabs(base.cross(other.first() - this->second()));
@@ -90,8 +99,7 @@ std::vector<Point> Segment::intersection(Segment const& other, double const prec
 
         double const secondDistancePercent = secondDistance / (firstDistance + secondDistance);
 
-        // zong if secondDistancePercent == 0.0 or secondDistancePercent == 1.0
-
+        // TODO: if secondDistancePercent == 0.0 or secondDistancePercent == 1.0, shall return end point?
         return {other.second() * (1.0 - secondDistancePercent) + other.first() * secondDistancePercent};
     }
 }
