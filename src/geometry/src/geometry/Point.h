@@ -1,85 +1,88 @@
 #pragma once
 
-#include "assistance/Vector.h"
+#include "assistance/VectorF.h"
+#include "util/concept.h"
+#include "util/math.h"
 
 namespace zong
 {
 namespace geometry
 {
 
-class Vector;
-
-/// <summary>
-/// just one double point
-/// </summary>
+/**
+ * \brief just one value_type point
+ * \tparam value_type double or int
+ */
+template <util::IsNumber value_type>
 class Point
 {
 private:
-    double _x;
-    double _y;
+    // TODO: optimize to _data[2]
+    value_type _xPosition;
+    value_type _yPosition;
 
 public:
-    /// <summary>
-    /// explicit constructor
-    /// </summary>
-    explicit Point() : _x(0.0), _y(0.0) {}
+    explicit Point<value_type>() : _xPosition(0.0), _yPosition(0.0) {}
+    explicit Point<value_type>(value_type const x, value_type const y) : _xPosition(x), _yPosition(y) {}
 
-    /// <summary>
-    /// explicit constructor
-    /// </summary>
-    /// <param name="x">x position</param>
-    /// <param name="y">y position</param>
-    explicit Point(double const x, double const y) : _x(x), _y(y) {}
-    // Point(Vector const& other);
-    // copy-assignment
-    // non-constructor
+    inline value_type x() const { return _xPosition; }
+    inline value_type y() const { return _yPosition; }
 
-    inline double x() const { return _x; }
-    inline double y() const { return _y; }
+    inline void setX(value_type const x) { _xPosition = x; }
+    inline void setY(value_type const y) { _yPosition = y; }
 
-    inline void setX(double const x) { _x = x; }
-    inline void setY(double const y) { _y = y; }
+    inline static bool isEqual(Point<value_type> const& a, Point<value_type> const& b, value_type const precision)
+    {
+        return util::isEqual(a.x(), b.x(), precision) && util::isEqual(a.y(), b.y(), precision);
+    }
 
-    // assignment
-    static bool isEqual(Point const& a, Point const& b, double const precision);    // Add precision
-    static bool isNotEqual(Point const& a, Point const& b, double const precision); // Add precision
+    inline static bool isNotEqual(Point<value_type> const& a, Point<value_type> const& b, value_type const precision)
+    {
+        return !Point<value_type>::isEqual(a, b, precision);
+    }
 
-    /// <summary>
-    /// Point + Point = Point
-    /// </summary>
-    /// <param name="other">another Point</param>
-    /// <returns>Point</returns>
-    Point        operator+(Point const& other) const { return Point(x() + other.x(), y() + other.y()); }
-    inline Point operator+=(Point const& other)
+    /**
+     * \brief Point<value_type> + Point<value_type> = Point<value_type>
+     * \param other another Point<value_type>
+     * \return Point<value_type>
+     */
+    inline Point<value_type> operator+(Point<value_type> const& other) const { return Point<value_type>(x() + other.x(), y() + other.y()); }
+
+    /**
+     * \brief Point<value_type> += Point<value_type>
+     * \param other another Point<value_type>
+     * \return Point<value_type>
+     */
+    inline Point<value_type> operator+=(Point<value_type> const& other)
     {
         setX(x() + other.x());
         setY(y() + other.y());
         return *this;
     }
 
-    /// <summary>
-    /// Point + Vector = Point
-    /// </summary>
-    /// <param name="other">another Vector</param>
-    /// <returns>Point</returns>
-    Point operator+(Vector const& other) const { return Point(x() + other.x(), y() + other.y()); }
+    /**
+     * \brief Point<value_type> + VectorF = Point<value_type>
+     * \param other another VectorF
+     * \return Point<value_type>
+     */
+    inline Point<value_type> operator+(VectorF const& other) const { return Point<value_type>(x() + other.x(), y() + other.y()); }
 
-    /// <summary>
-    /// Point - Point = Vector
-    /// </summary>
-    /// <param name="other">another Point</param>
-    /// <returns>Vector</returns>
-    Vector operator-(Point const& other) const { return Vector(x() - other.x(), y() - other.y()); }
+    /**
+     * \brief Point<value_type> - Point<value_type> = VectorF
+     * \param other another Point<value_type>
+     * \return VectorF
+     */
+    inline VectorF operator-(Point<value_type> const& other) const { return VectorF(x() - other.x(), y() - other.y()); }
 
-    /// <summary>
-    /// Point - Vector = Point
-    /// </summary>
-    /// <param name="other">another Vector</param>
-    /// <returns>Point</returns>
-    Point operator-(Vector const& other) const { return Point(x() - other.x(), y() - other.y()); }
+    /**
+     * \brief Point<value_type> - VectorF = Point<value_type>
+     * \param other another VectorF
+     * \return Point<value_type>
+     */
+    inline Point<value_type> operator-(VectorF const& other) const { return Point<value_type>(x() - other.x(), y() - other.y()); }
 
-    inline Point operator*(double const scale) const { return Point(x() * scale, y() * scale); }
-    inline Point operator*=(double const scale)
+    inline Point<value_type> operator*(value_type const scale) const { return Point<value_type>(x() * scale, y() * scale); }
+    inline Point<value_type> operator*=(value_type const scale)
     {
         setX(x() * scale);
         setY(y() * scale);
@@ -87,8 +90,8 @@ public:
     }
 };
 
-// typedef Point      DoublePoint;
-// typedef Point<int> IntPoint;
+template <class PointType>
+concept IsPoint = std::is_same_v<PointType, Point<int>> || std::is_same_v<PointType, Point<double>>;
 
 } // namespace geometry
 } // namespace zong

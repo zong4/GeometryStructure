@@ -34,56 +34,36 @@ public:
 } // namespace common
 } // namespace zong
 
+/**
+ * @defgroup Log Log.h debug macro
+ * @{core log macros: \n
+ * * ZONG_CORE_TRACE: basic information
+ * * ZONG_CORE_INFO: need be optimized
+ * * ZONG_CORE_WARN: should be solved
+ * * ZONG_CORE_ERROR: error
+ * * ZONG_CORE_CRITICAL: serious error
+ *
+ * client log macros: \n
+ * * ZONG_TRACE: basic information
+ * * ZONG_INFO: need be optimized
+ * * ZONG_WARN: should be solved
+ * * ZONG_ERROR: error
+ * * ZONG_CRITICAL: serious error
+ */
+
 #ifdef DEBUG
-
-    /// <summary>
-    /// core log, basic information
-    /// </summary>
+  // core log macros
     #define ZONG_CORE_TRACE(...) zong::common::Log::coreLogger()->trace(__VA_ARGS__)
-
-    /// <summary>
-    /// core log, need be optimized
-    /// </summary>
     #define ZONG_CORE_INFO(...) zong::common::Log::coreLogger()->info(__VA_ARGS__)
-
-    /// <summary>
-    /// core log, need be controled by user
-    /// </summary>
     #define ZONG_CORE_WARN(...) zong::common::Log::coreLogger()->warn(__VA_ARGS__)
-
-    /// <summary>
-    /// core log, error
-    /// </summary>
     #define ZONG_CORE_ERROR(...) zong::common::Log::coreLogger()->error(__VA_ARGS__)
-
-    /// <summary>
-    /// core log, serious error
-    /// </summary>
     #define ZONG_CORE_CRITICAL(...) zong::common::Log::coreLogger()->critical(__VA_ARGS__)
 
-    /// <summary>
-    /// client log, basic information
-    /// </summary>
+    // client log macros
     #define ZONG_TRACE(...) zong::common::Log::clientLogger()->trace(__VA_ARGS__)
-
-    /// <summary>
-    /// client log, need be optimized
-    /// </summary>
     #define ZONG_INFO(...) zong::common::Log::clientLogger()->info(__VA_ARGS__)
-
-    /// <summary>
-    /// client log, need be controled by user
-    /// </summary>
     #define ZONG_WARN(...) zong::common::Log::clientLogger()->warn(__VA_ARGS__)
-
-    /// <summary>
-    /// client log, error
-    /// </summary>
     #define ZONG_ERROR(...) zong::common::Log::clientLogger()->error(__VA_ARGS__)
-
-    /// <summary>
-    /// client log, serious error
-    /// </summary>
     #define ZONG_CRITICAL(...) zong::common::Log::clientLogger()->critical(__VA_ARGS__)
 #elif RELEASE
   // core log macros
@@ -100,3 +80,5 @@ public:
     #define ZONG_ERROR(...)
     #define ZONG_CRITICAL(...)
 #endif
+
+/** @} */

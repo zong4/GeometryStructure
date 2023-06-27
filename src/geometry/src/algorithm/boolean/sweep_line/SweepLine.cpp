@@ -1,10 +1,10 @@
 #include "SweepLine.h"
 
-#include "../../../util/math.h"
-
 #include <algorithm>
 
-SweepLine::SweepLine(std::vector<zong::geometry::Segment>& segmentVec)
+#include "../../../util/math.h"
+
+SweepLine::SweepLine(std::vector<zong::geometry::SegmentF>& segmentVec)
 {
     resetSegmentsPoints(segmentVec);
 
@@ -24,9 +24,9 @@ SweepLine::SweepLine(std::vector<zong::geometry::Segment>& segmentVec)
 }
 
 // 对换点，保证第一个点是起始点，第二个点是终点
-void SweepLine::resetSegmentsPoints(std::vector<zong::geometry::Segment>& segments) const
+void SweepLine::resetSegmentsPoints(std::vector<zong::geometry::SegmentF>& segments) const
 {
-    zong::geometry::Point startPoint2d, endPoint2d;
+    zong::geometry::Point<double> startPoint2d, endPoint2d;
     for (auto& segment : segments)
     {
         if (segment.first().x() < segment.second().x())
@@ -69,8 +69,8 @@ void SweepLine::updateSegmentTree(const double sweepLineXPos, const double sweep
 
 void SweepLine::emplaceCrossPoint(int& a, int& b)
 {
-    std::vector<zong::geometry::Point> crossPoints =
-        _segmentTree[a].segment().intersection(_segmentTree[b].segment(), zong::util::HIGH_EPS);
+    std::vector<zong::geometry::Point<double>> crossPoints =
+        _segmentTree[a].segment().intersection(_segmentTree[b].segment(), zong::util::HIGH_EPS_DOUBLE);
 
     if (crossPoints.empty())
         return;
@@ -78,7 +78,7 @@ void SweepLine::emplaceCrossPoint(int& a, int& b)
     // 排序至与 m_priorityQueue 同序
     if (crossPoints.size() == 2)
     {
-        zong::geometry::Point tmpPoint = crossPoints[0];
+        zong::geometry::Point<double> tmpPoint = crossPoints[0];
         if (!IS_FLOAT_EQUAL(crossPoints[0].x(), crossPoints[1].x()))
         {
             if (crossPoints[0].x() > crossPoints[1].x())
@@ -98,15 +98,15 @@ void SweepLine::emplaceCrossPoint(int& a, int& b)
     }
 
     // 取数据
-    zong::geometry::Point crossPoint       = crossPoints[0];                   // 交点
-    SegmentEvent          segmentA         = _segmentTree[a];                  // 线段 a
-    PointEvent            aStartPointEvent = segmentA.startPointEvent();       // 从线段 a 裁剪出的线段的起点（会变）
-    PointEvent            aEndPointEvent   = *(aStartPointEvent.otherEvent()); // 线段 a 的终点（不变）
-    SegmentEvent          segmentB         = _segmentTree[b];                  // 线段 b
-    PointEvent            bStartPointEvent = segmentB.startPointEvent();       // 从线段 b 裁剪出的线段的起点（会变）
-    PointEvent            bEndPointEvent   = *(bStartPointEvent.otherEvent()); // 线段 b 的终点（不变）
-    bool                  isEndPointA;                                         // 是不是 a 的端点
-    bool                  isEndPointB;                                         // 是不是 b 的端点
+    zong::geometry::Point<double> crossPoint       = crossPoints[0];             // 交点
+    SegmentEvent                  segmentA         = _segmentTree[a];            // 线段 a
+    PointEvent                    aStartPointEvent = segmentA.startPointEvent(); // 从线段 a 裁剪出的线段的起点（会变）
+    PointEvent                    aEndPointEvent   = *(aStartPointEvent.otherEvent()); // 线段 a 的终点（不变）
+    SegmentEvent                  segmentB         = _segmentTree[b];                  // 线段 b
+    PointEvent                    bStartPointEvent = segmentB.startPointEvent(); // 从线段 b 裁剪出的线段的起点（会变）
+    PointEvent                    bEndPointEvent   = *(bStartPointEvent.otherEvent()); // 线段 b 的终点（不变）
+    bool                          isEndPointA;                                         // 是不是 a 的端点
+    bool                          isEndPointB;                                         // 是不是 b 的端点
 
     // 裁剪线段
     for (int i = 0; i < crossPoints.size(); i++)

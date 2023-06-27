@@ -8,6 +8,7 @@ target("geometry")
     add_rules("BuildLibrary")
     set_kind("$(kind)")
     add_files("./**/*.cpp")
+    add_headerfiles("./**/*.h")
     add_includedirs("src/", {public = true}) 
 
     -- if is_mode("debug") then

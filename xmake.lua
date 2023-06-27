@@ -5,7 +5,7 @@ set_version("1.0.0", {build = "%Y%m%d%H%M"})
 
 -- set common flags
 -- set_warnings("all", "error")
-set_languages("c++17")
+set_languages("c++20")
 --add_cxflags("-Wno-error=deprecated-declarations", "-fno-strict-aliasing", "-Wno-error=expansion-to-defined")
 --add_mxflags("-Wno-error=deprecated-declarations", "-fno-strict-aliasing", "-Wno-error=expansion-to-defined")
 
