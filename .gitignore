@@ -16,3 +16,6 @@ install/
 *.lnk
 html/
 latex/
+
+# VSCode cache
+.vscode/

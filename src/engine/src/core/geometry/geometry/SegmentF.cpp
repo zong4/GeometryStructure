@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-#include "common/log.h"
+#include "../../log/log.h"
 
 bool zong::geometry::SegmentF::haveK(double const precision) const
 {

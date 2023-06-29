@@ -11,7 +11,6 @@ namespace geometry
 /**
  * \brief double vector, parameter is as same as Point<double>
  */
-// template <util::IsNumber double>
 class VectorF
 {
 private:

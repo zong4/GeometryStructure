@@ -1,11 +1,16 @@
-add_defines("EDITOR")
+add_defines("CORE")
 
-target("editor")
-    add_deps("engine")
+target("core")
+    add_deps("third_party")
 
-    set_kind("binary")
-    add_files("src/main.cpp")
+    add_files("./**/*.cpp")
+    add_headerfiles("./**/*.h")
+    -- add_includedirs("../", {public = true}) 
 
+    set_kind("static")
+    -- add_rules("BuildLibrary")
+    -- set_kind("$(kind)")
+  
 --
 -- If you want to known more usage about xmake, please see https://xmake.io
 --

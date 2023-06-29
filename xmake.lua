@@ -1,10 +1,10 @@
 -- define project
-set_project("GeometryStructure")
+set_project("Engine")
 set_xmakever("2.7.0")
 set_version("1.0.0", {build = "%Y%m%d%H%M"})
 
 -- set common flags
--- set_warnings("all", "error")
+set_warnings("all", "error")
 set_languages("c++20")
 --add_cxflags("-Wno-error=deprecated-declarations", "-fno-strict-aliasing", "-Wno-error=expansion-to-defined")
 --add_mxflags("-Wno-error=deprecated-declarations", "-fno-strict-aliasing", "-Wno-error=expansion-to-defined")
@@ -17,26 +17,9 @@ add_rules("mode.release", "mode.debug")
 -- set_config("editor", "src/editor")
 
 -- includes sub-projects
-includes("src/geometry", "src/editor")
-
--- library rule
-rule("BuildLibrary")
-    on_load(function (target)
-        if is_mode("debug", "releasedbg") then
-            target:set("kind", "shared")
-            if is_plat("windows") then
-                import("core.project.rule")
-                local rule = rule.rule("utils.symbols.export_all")
-                target:rule_add(rule)
-                target:extraconf_set("rules", "utils.symbols.export_all", {export_classes = true}) -- add export_all
-            end
-        elseif is_mode("release") then
-            target:set("kind", "static")
-        else
-            assert(false, "Unknown build kind")
-        end
-    end)
-rule_end()
+includes("src/engine",
+         "src/editor",
+         "src/test")
 
 -- global macro defination
 if is_plat("windows") then
@@ -51,6 +34,44 @@ if is_mode("debug") then
 elseif is_mode("release") then
     add_defines("RELEASE")
 end
+
+-- library rule
+rule("BuildLibrary")
+    on_load(function (target)
+        if is_mode("debug") then
+            target:set("kind", "shared")
+            if is_plat("windows") then
+                import("core.project.rule")
+                local rule = rule.rule("utils.symbols.export_all")
+                target:rule_add(rule)
+                target:extraconf_set("rules", "utils.symbols.export_all", {export_classes = true})
+            end
+        elseif is_mode("release") then
+            target:set("kind", "static")
+        else
+            assert(false, "Unknown build kind")
+        end
+    end)
+rule_end()
+
+-- -- library rule
+-- rule("DebugLibrary")
+--     on_load(function (target)
+--         if is_mode("debug", "releasedbg") then
+--             target:set("kind", "shared")
+--             if is_plat("windows") then
+--                 import("core.project.rule")
+--                 local rule = rule.rule("utils.symbols.export_all")
+--                 target:rule_add(rule)
+--                 target:extraconf_set("rules", "utils.symbols.export_all", {export_classes = true}) -- add export_all
+--             end
+--         elseif is_mode("release") then
+--             target:set("phony", "static")
+--         else
+--             assert(false, "Unknown build kind")
+--         end
+--     end)
+-- rule_end()
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io

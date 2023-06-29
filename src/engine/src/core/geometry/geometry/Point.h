@@ -1,8 +1,8 @@
 #pragma once
 
+#include "../util/concept.h"
+#include "../util/math.h"
 #include "assistance/VectorF.h"
-#include "util/concept.h"
-#include "util/math.h"
 
 namespace zong
 {

@@ -1,10 +1,13 @@
-add_defines("EDITOR")
+add_defines("TEST")
 
-target("editor")
+add_requires("gtest 1.12.1")
+
+target("test")
     add_deps("engine")
+    add_packages("gtest")
 
     set_kind("binary")
-    add_files("src/main.cpp")
+    add_files("main.cpp", "./**/*.cpp")
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io

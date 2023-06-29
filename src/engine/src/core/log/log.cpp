@@ -21,12 +21,12 @@ void Log::init()
 
     std::vector<spdlog::sink_ptr> logSinks;
     logSinks.emplace_back(std::make_shared<spdlog::sinks::stdout_color_sink_mt>());
-    logSinks.emplace_back(std::make_shared<spdlog::sinks::basic_file_sink_mt>("logs/GeometryStructure.log", true));
+    logSinks.emplace_back(std::make_shared<spdlog::sinks::basic_file_sink_mt>("logs/Engine.log", true));
 
     logSinks[0]->set_pattern("%^[%T] %n: %v%$");
     logSinks[1]->set_pattern("[%T] [%l] %n: %v");
 
-    _coreLogger = std::make_shared<spdlog::logger>("Geometry", begin(logSinks), end(logSinks));
+    _coreLogger = std::make_shared<spdlog::logger>("Engine", begin(logSinks), end(logSinks));
     spdlog::register_logger(_coreLogger);
     _coreLogger->set_level(spdlog::level::trace);
     _coreLogger->flush_on(spdlog::level::trace);

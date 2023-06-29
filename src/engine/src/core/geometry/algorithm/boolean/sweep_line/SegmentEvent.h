@@ -2,7 +2,6 @@
 
 #include "../boolean_pch.h"
 #include "PointEvent.h"
-#include "geometry/SegmentF.h"
 
 class SegmentEvent
 {

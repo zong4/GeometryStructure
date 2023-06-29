@@ -8,13 +8,6 @@
 #include "../../geometry/Point.h"
 #include "../../geometry/SegmentF.h"
 
-// 暂时用不到
-enum class Axis : int
-{
-    X = 0,
-    Y = 1,
-};
-
 // 浮点精度
 constexpr double EPS       = 0.0000001;
 constexpr double SMALL_EPS = 0.00000001;
