@@ -3,6 +3,7 @@
 #include <variant>
 
 #include "../../util/math.h"
+#include <math.h>
 
 namespace zong
 {

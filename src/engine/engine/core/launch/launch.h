@@ -15,7 +15,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine,
     return 0;
 }
 
-#elif define LINUX
+#elif LINUX
 
 int main(int argc, char** argv)
 {

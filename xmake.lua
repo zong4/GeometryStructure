@@ -13,8 +13,11 @@ add_rules("mode.release", "mode.debug")
 
 -- includes sub-projects
 includes("src/engine",
-         "src/editor",
-         "src/test")
+         "src/editor")
+
+if is_mode("debug") and is_plat("windows") then
+        includes("src/test")
+end
 
 -- global macro defination
 if is_plat("windows") then
