@@ -1,13 +1,12 @@
 #pragma once
 
+#include <math.h>
+
 #include <variant>
 
 #include "../../util/math.h"
-#include <math.h>
 
 namespace zong
-{
-namespace geometry
 {
 
 /**
@@ -92,5 +91,4 @@ public:
     static Vector NormalVector;
 };
 
-} // namespace geometry
 } // namespace zong

@@ -9,6 +9,9 @@
 #include "PointEvent.h"
 #include "SegmentEvent.h"
 
+namespace zong
+{
+
 class SweepLine
 {
 private:
@@ -18,13 +21,13 @@ private:
     std::vector<SegmentEvent> _segmentTree;    // TODO: 用 mutil_set 试试
 
 public:
-    SweepLine(std::vector<zong::geometry::SegmentF>& segmentVec);
+    SweepLine(std::vector<zong::SegmentF>& segmentVec);
 
     inline point2d_unordered_set GetAllCrossPoints() const { return _allCrossPoints; }
 
 private:
     // 预处理函数
-    void resetSegmentsPoints(std::vector<zong::geometry::SegmentF>& segments) const;
+    void resetSegmentsPoints(std::vector<zong::SegmentF>& segments) const;
 
     void updateSegmentTree(double sweepLineXPos, double sweepLineYPos);
     void emplaceCrossPoint(int& a, int& b); // 用引用是为了改成红黑树的时候方便
@@ -32,3 +35,5 @@ private:
 public:
     void scan();
 };
+
+} // namespace zong

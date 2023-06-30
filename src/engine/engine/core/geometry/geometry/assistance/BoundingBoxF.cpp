@@ -1,6 +1,6 @@
 #include "BoundingBoxF.h"
 
-void zong::geometry::BoundingBoxF::extend(Point<double> const& point)
+void zong::BoundingBoxF::extend(PointF const& point)
 {
     setMinX(minX() < point.x() ? minX() : point.x());
     setMaxX(maxX() > point.x() ? maxX() : point.x());
@@ -8,7 +8,7 @@ void zong::geometry::BoundingBoxF::extend(Point<double> const& point)
     setMaxY(maxY() > point.y() ? maxY() : point.y());
 }
 
-void zong::geometry::BoundingBoxF::extend(BoundingBoxF const& box)
+void zong::BoundingBoxF::extend(BoundingBoxF const& box)
 {
     setMinX(minX() < box.minX() ? minX() : box.minX());
     setMaxX(maxX() > box.maxX() ? maxX() : box.maxX());
@@ -16,7 +16,7 @@ void zong::geometry::BoundingBoxF::extend(BoundingBoxF const& box)
     setMaxY(maxY() > box.maxY() ? maxY() : box.maxY());
 }
 
-bool zong::geometry::BoundingBoxF::isIntersection(BoundingBoxF const& box, double precision) const
+bool zong::BoundingBoxF::isIntersection(BoundingBoxF const& box, double precision) const
 {
     if (util::isGreater(this->minX(), box.maxX(), precision) || util::isGreater(box.minX(), this->maxX(), precision) ||
         util::isGreater(this->minY(), box.maxY(), precision) || util::isGreater(box.minY(), this->maxY(), precision))

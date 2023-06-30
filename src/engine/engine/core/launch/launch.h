@@ -2,11 +2,15 @@
 
 #include "Application.h"
 
-#ifdef WINDOWS
-    #include <windows.h>
+#ifndef TEST
+    #ifdef WINDOWS
+        #include <windows.h>
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow)
 {
+    // call the console window
+    AllocConsole();
+
     auto const app = zong::CreateApplication();
 
     app->Init();
@@ -15,7 +19,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine,
     return 0;
 }
 
-#elif LINUX
+    #elif LINUX
 
 int main(int argc, char** argv)
 {
@@ -26,5 +30,7 @@ int main(int argc, char** argv)
 
     return 0;
 }
+
+    #endif
 
 #endif

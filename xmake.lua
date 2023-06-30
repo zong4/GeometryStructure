@@ -12,26 +12,32 @@ add_mxflags("-Wno-error=deprecated-declarations", "-fno-strict-aliasing", "-Wno-
 add_rules("mode.release", "mode.debug")
 
 -- includes sub-projects
-includes("src/engine",
-         "src/editor")
+includes("src/engine")
 
-if is_mode("debug") and is_plat("windows") then
-    includes("src/test")
-end
+-- choose test or not
+isTest = false; 
 
--- global macro defination
-if is_plat("windows") then
-    add_defines("WINDOWS")
-    add_ldflags("-subsystem:windows")
-elseif is_plat("linux") then
-    add_defines("LINUX")
-end
-
--- global macro defination
-if is_mode("debug") then
+if isTest then
+    add_defines("TEST")
     add_defines("DEBUG")
-elseif is_mode("release") then
-    add_defines("RELEASE")
+    includes("src/test")
+else 
+    includes("src/editor")
+
+    -- add macro
+    if is_mode("debug") then
+        add_defines("DEBUG")
+    elseif is_mode("release") then
+        add_defines("RELEASE")
+    end
+
+    -- add macro
+    if is_plat("windows") then
+        add_defines("WINDOWS")
+        add_ldflags("-subsystem:windows")
+    elseif is_plat("linux") then
+        add_defines("LINUX")
+    end
 end
 
 -- library rule
@@ -52,25 +58,6 @@ rule("BuildLibrary")
         end
     end)
 rule_end()
-
--- -- library rule
--- rule("DebugLibrary")
---     on_load(function (target)
---         if is_mode("debug", "releasedbg") then
---             target:set("kind", "shared")
---             if is_plat("windows") then
---                 import("core.project.rule")
---                 local rule = rule.rule("utils.symbols.export_all")
---                 target:rule_add(rule)
---                 target:extraconf_set("rules", "utils.symbols.export_all", {export_classes = true}) -- add export_all
---             end
---         elseif is_mode("release") then
---             target:set("phony", "static")
---         else
---             assert(false, "Unknown build kind")
---         end
---     end)
--- rule_end()
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io

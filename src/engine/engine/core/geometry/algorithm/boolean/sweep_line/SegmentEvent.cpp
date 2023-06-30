@@ -1,6 +1,6 @@
 #include "SegmentEvent.h"
 
-SegmentEvent::SegmentEvent(PointEvent const& pointEvent, PointEvent const& anotherPointEvent)
+zong::SegmentEvent::SegmentEvent(PointEvent const& pointEvent, PointEvent const& anotherPointEvent)
 {
     if (pointEvent.eventType() == EventType::StartPoint)
     {
@@ -29,7 +29,7 @@ SegmentEvent::SegmentEvent(PointEvent const& pointEvent, PointEvent const& anoth
     }
 }
 
-SegmentEvent SegmentEvent::operator=(SegmentEvent const& other)
+zong::SegmentEvent zong::SegmentEvent::operator=(SegmentEvent const& other)
 {
     this->_segment2d           = other._segment2d;
     this->_startPointEvent     = other._startPointEvent;
@@ -39,7 +39,7 @@ SegmentEvent SegmentEvent::operator=(SegmentEvent const& other)
     return *this;
 }
 
-bool SegmentEvent::operator==(SegmentEvent const& other) const
+bool zong::SegmentEvent::operator==(SegmentEvent const& other) const
 {
     if (!(*this < other) && !(*this > other))
         return true;
@@ -48,7 +48,7 @@ bool SegmentEvent::operator==(SegmentEvent const& other) const
 }
 
 // 默认从左下到右上
-bool SegmentEvent::operator<(SegmentEvent const& other) const
+bool zong::SegmentEvent::operator<(SegmentEvent const& other) const
 {
     if (!IS_FLOAT_EQUAL(this->_segment2d.first().x(), other._segment2d.first().x()))
         return this->_segment2d.first().x() < other._segment2d.first().x();
@@ -61,7 +61,7 @@ bool SegmentEvent::operator<(SegmentEvent const& other) const
 }
 
 // 默认从左下到右上
-bool SegmentEvent::operator>(SegmentEvent const& other) const
+bool zong::SegmentEvent::operator>(SegmentEvent const& other) const
 {
     if (!IS_FLOAT_EQUAL(this->_segment2d.first().x(), other._segment2d.first().x()))
         return this->_segment2d.first().x() > other._segment2d.first().x();
@@ -74,7 +74,7 @@ bool SegmentEvent::operator>(SegmentEvent const& other) const
 }
 
 // 默认扫描线垂直 x 轴，从左到右，不好改扫描线方向，改的话比较函数也要一起改
-void SegmentEvent::updateSweepLineCrossPoint(const double x, const double y)
+void zong::SegmentEvent::updateSweepLineCrossPoint(const double x, const double y)
 {
     if (_isNoK)
     {

@@ -5,7 +5,7 @@
 #include <unordered_set>
 #include <vector>
 
-#include "../../geometry/Point.h"
+#include "../../geometry/PointF.h"
 #include "../../geometry/SegmentF.h"
 
 // 浮点精度
@@ -15,7 +15,7 @@ constexpr double SMALL_EPS = 0.00000001;
 
 struct Point2dHash
 {
-    size_t operator()(zong::geometry::Point<double> const& point2d) const // size_t
+    size_t operator()(zong::PointF const& point2d) const // size_t
     {
         // return size_t(l.k ^ l.b);//自定义哈希
         return std::hash<double>()(point2d.x()) ^ std::hash<double>()(point2d.y());
@@ -24,11 +24,11 @@ struct Point2dHash
 
 struct Point2dIsEqual
 {
-    bool operator()(zong::geometry::Point<double> const& firstPoint2d,
-                    zong::geometry::Point<double> const& secondPoint2d) const // 最后的const不能少
+    bool operator()(zong::PointF const& firstPoint2d,
+                    zong::PointF const& secondPoint2d) const // 最后的const不能少
     {
         return (IS_FLOAT_EQUAL(firstPoint2d.x(), secondPoint2d.x()) && IS_FLOAT_EQUAL(firstPoint2d.y(), secondPoint2d.y()));
     }
 };
 
-typedef std::unordered_set<zong::geometry::Point<double>, Point2dHash, Point2dIsEqual> point2d_unordered_set;
+typedef std::unordered_set<zong::PointF, Point2dHash, Point2dIsEqual> point2d_unordered_set;

@@ -4,7 +4,7 @@
 
 #include "../../log/Log.h"
 
-bool zong::geometry::SegmentF::haveK(double const precision) const
+bool zong::SegmentF::haveK(double const precision) const
 {
     if (util::isEqual(first().x(), second().x(), precision))
         return false;
@@ -12,7 +12,7 @@ bool zong::geometry::SegmentF::haveK(double const precision) const
         return true;
 }
 
-double zong::geometry::SegmentF::k(double const precision) const
+double zong::SegmentF::k(double const precision) const
 {
     if (!haveK(precision))
     {
@@ -23,7 +23,7 @@ double zong::geometry::SegmentF::k(double const precision) const
         return (second().y() - first().y()) / (second().x() - first().x());
 }
 
-zong::geometry::BoundingBoxF zong::geometry::SegmentF::box() const
+zong::BoundingBoxF zong::SegmentF::box() const
 {
     BoundingBoxF box;
 
@@ -33,17 +33,17 @@ zong::geometry::BoundingBoxF zong::geometry::SegmentF::box() const
     return box;
 }
 
-bool zong::geometry::SegmentF::isEqual(SegmentF const& a, SegmentF const& b, double const precision)
+bool zong::SegmentF::isEqual(SegmentF const& a, SegmentF const& b, double const precision)
 {
-    return Point<double>::isEqual(a.first(), b.first(), precision) && Point<double>::isEqual(a.second(), b.second(), precision);
+    return PointF::isEqual(a.first(), b.first(), precision) && PointF::isEqual(a.second(), b.second(), precision);
 }
 
-bool zong::geometry::SegmentF::isNotEqual(SegmentF const& a, SegmentF const& b, double const precision)
+bool zong::SegmentF::isNotEqual(SegmentF const& a, SegmentF const& b, double const precision)
 {
     return !SegmentF::isEqual(a, b, precision);
 }
 
-zong::geometry::SegmentIntersectionState zong::geometry::SegmentF::isIntersection(SegmentF const& other, double const precision) const
+zong::SegmentIntersectionState zong::SegmentF::isIntersection(SegmentF const& other, double const precision) const
 {
     // box intersection
     if (!this->box().isIntersection(other.box(), precision))
@@ -67,7 +67,7 @@ zong::geometry::SegmentIntersectionState zong::geometry::SegmentF::isIntersectio
     return SegmentIntersectionState::Overlap;
 }
 
-std::vector<zong::geometry::Point<double>> zong::geometry::SegmentF::intersection(SegmentF const& other, double const precision) const
+std::vector<zong::PointF> zong::SegmentF::intersection(SegmentF const& other, double const precision) const
 {
     SegmentIntersectionState const state = this->isIntersection(other, precision);
     if (state == SegmentIntersectionState::Separate)
@@ -75,35 +75,35 @@ std::vector<zong::geometry::Point<double>> zong::geometry::SegmentF::intersectio
 
     if (state == SegmentIntersectionState::Overlap)
     {
-        std::vector<Point<double>> points(4);
+        std::vector<PointF> points(4);
         points[0] = this->first();
         points[1] = this->second();
         points[2] = other.first();
         points[3] = other.second();
 
-        std::sort(points.begin(), points.end(), [&](Point<double> const& a, Point<double> const& b) {
+        std::sort(points.begin(), points.end(), [&](PointF const& a, PointF const& b) {
             if (util::isNotEqual(a.x(), b.x(), precision))
                 return a.x() < b.x();
             else
                 return a.y() < b.y();
         });
 
-        if (Point<double>::isEqual(points[1], points[2], precision))
+        if (PointF::isEqual(points[1], points[2], precision))
             return {(points[1] + points[2]) * 0.5}; // TODO: * 0.5 is meaningful?
         else
         {
-            std::vector<Point<double>> crossPoints(2);
-            if (Point<double>::isEqual(points[0], points[1], precision))
+            std::vector<PointF> crossPoints(2);
+            if (PointF::isEqual(points[0], points[1], precision))
                 crossPoints[0] = ((points[0] + points[1]) * 0.5); // TODO: * 0.5 is meaningful?
             else
                 crossPoints[0] = (points[1]);
 
-            if (Point<double>::isEqual(points[2], points[3], precision))
+            if (PointF::isEqual(points[2], points[3], precision))
                 crossPoints[1] = ((points[2] + points[3]) * 0.5); // TODO: * 0.5 is meaningful?
             else
                 crossPoints[1] = (points[2]);
 
-            if (Point<double>::isEqual(crossPoints[0], crossPoints[1], precision))
+            if (PointF::isEqual(crossPoints[0], crossPoints[1], precision))
                 return {(points[2] + points[3]) * 0.5}; // TODO: * 0.5 is meaningful?
             else
                 return crossPoints;
@@ -122,9 +122,9 @@ std::vector<zong::geometry::Point<double>> zong::geometry::SegmentF::intersectio
     }
 }
 
-inline bool zong::geometry::SegmentF::isValid(double const precision) const
+inline bool zong::SegmentF::isValid(double const precision) const
 {
-    if (Point<double>::isEqual(_first, _second, precision))
+    if (PointF::isEqual(_first, _second, precision))
     {
         ZONG_CORE_WARN("this segment is just a point under the precision");
         return false;

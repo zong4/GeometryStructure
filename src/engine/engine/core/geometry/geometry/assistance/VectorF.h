@@ -1,16 +1,15 @@
 #pragma once
 
+#include <math.h>
+
 #include "../../util/concept.h"
 #include "../../util/math.h"
-#include <math.h>
 
 namespace zong
 {
-namespace geometry
-{
 
 /**
- * \brief double vector, parameter is as same as Point<double>
+ * \brief double vector, parameter is as same as PointF
  */
 class VectorF
 {
@@ -91,5 +90,4 @@ public:
     static VectorF NormalVectorF;
 };
 
-} // namespace geometry
 } // namespace zong

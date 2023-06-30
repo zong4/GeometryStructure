@@ -1,9 +1,11 @@
 add_defines("THIRD_PARTY")
 
-includes("third_party_d")
+add_requires("spdlog 1.11.0", "gtest 1.12.1", {debug=true})
+add_requires("vulkansdk", "glm", "glfw")
 
 target("third_party")
-    add_deps("third_party_d")
+    add_packages("spdlog", "gtest", {public = true})
+    add_packages("vulkansdk", "glm", "glfw", {public = true})
     
     set_kind("static")
 

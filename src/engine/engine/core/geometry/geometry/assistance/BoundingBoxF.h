@@ -2,11 +2,9 @@
 
 #include <float.h>
 
-#include "../Point.h"
+#include "../PointF.h"
 
 namespace zong
-{
-namespace geometry
 {
 
 /**
@@ -31,10 +29,10 @@ public:
     inline double maxX() const { return _data[2]; }
     inline double maxY() const { return _data[3]; }
 
-    inline Point<double> minPoint() const { return Point<double>(_data[0], _data[1]); }
-    inline Point<double> maxPoint() const { return Point<double>(_data[2], _data[3]); }
+    inline PointF minPoint() const { return PointF(_data[0], _data[1]); }
+    inline PointF maxPoint() const { return PointF(_data[2], _data[3]); }
 
-    void extend(Point<double> const& point);
+    void extend(PointF const& point);
     void extend(BoundingBoxF const& box);
 
     bool isIntersection(BoundingBoxF const& box, double precision) const;
@@ -46,5 +44,4 @@ private:
     inline void setMaxY(double maxY) { _data[3] = maxY; }
 };
 
-} // namespace geometry
 } // namespace zong

@@ -2,12 +2,10 @@
 
 #include <vector>
 
-#include "Point.h"
+#include "PointF.h"
 #include "assistance/BoundingBoxF.h"
 
 namespace zong
-{
-namespace geometry
 {
 
 /**
@@ -30,15 +28,15 @@ enum class SegmentIntersectionState : int
 class SegmentF
 {
 private:
-    Point<double> _first;
-    Point<double> _second;
+    PointF _first;
+    PointF _second;
 
 public:
-    SegmentF() : _first(Point<double>()), _second(Point<double>()) {}
-    SegmentF(Point<double> const& first, Point<double> const& second) : _first(first), _second(second) {}
+    SegmentF() : _first(PointF()), _second(PointF()) {}
+    SegmentF(PointF const& first, PointF const& second) : _first(first), _second(second) {}
 
-    inline Point<double> first() const { return _first; }
-    inline Point<double> second() const { return _second; }
+    inline PointF first() const { return _first; }
+    inline PointF second() const { return _second; }
 
     /**
      * \brief is this segment // y axis
@@ -57,8 +55,8 @@ public:
 
     BoundingBoxF box() const;
 
-    inline void setFirst(Point<double> const& first) { _first = first; }
-    inline void setSecond(Point<double> const& second) { _second = second; }
+    inline void setFirst(PointF const& first) { _first = first; }
+    inline void setSecond(PointF const& second) { _second = second; }
 
     static bool isEqual(SegmentF const& a, SegmentF const& b, double const precision);
     static bool isNotEqual(SegmentF const& a, SegmentF const& b, double const precision);
@@ -78,7 +76,7 @@ public:
      * \return cross points \n
      * if return two points, they will sort by less x position and then less y position
      */
-    std::vector<Point<double>> intersection(SegmentF const& other, double const precision) const;
+    std::vector<PointF> intersection(SegmentF const& other, double const precision) const;
 
 private:
     /**
@@ -90,5 +88,4 @@ private:
     inline bool isValid(double const precision = util::HIGH_EPS_DOUBLE) const;
 };
 
-} // namespace geometry
 } // namespace zong
