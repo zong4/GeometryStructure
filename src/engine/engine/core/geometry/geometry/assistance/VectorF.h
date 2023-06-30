@@ -2,6 +2,7 @@
 
 #include "../../util/concept.h"
 #include "../../util/math.h"
+#include <math.h>
 
 namespace zong
 {

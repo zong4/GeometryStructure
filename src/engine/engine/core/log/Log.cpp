@@ -1,4 +1,4 @@
-#include "log.h"
+#include "Log.h"
 
 #ifdef DEBUG
     #include <spdlog/sinks/basic_file_sink.h>

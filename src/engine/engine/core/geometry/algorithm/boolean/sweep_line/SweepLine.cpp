@@ -109,7 +109,7 @@ void SweepLine::emplaceCrossPoint(int& a, int& b)
     bool                          isEndPointB;                                         // 是不是 b 的端点
 
     // 裁剪线段
-    for (int i = 0; i < crossPoints.size(); i++)
+    for ( int i = 0; i < (int)crossPoints.size(); ++i)
     {
         isEndPointA = true;
         isEndPointB = true;
@@ -242,7 +242,7 @@ void SweepLine::scan()
 
             // 查找线段位置
             int it;
-            for (int i = 0; i < _segmentTree.size(); i++)
+            for (int i = 0; i < (int)_segmentTree.size(); i++)
             {
                 if (tmpSegment2d == _segmentTree[i])
                 {
@@ -254,7 +254,7 @@ void SweepLine::scan()
             auto nextIt = it + 1;
 
             // nextIt 存在
-            if (nextIt != _segmentTree.size())
+            if (nextIt != (int)_segmentTree.size())
                 emplaceCrossPoint(it, nextIt);
             // prevIt 存在
             if (prevIt != -1)
@@ -271,7 +271,7 @@ void SweepLine::scan()
 
             // 如果能找到
             int i;
-            for (i = 0; i < _segmentTree.size(); i++)
+            for (i = 0; i < (int)_segmentTree.size(); i++)
             {
                 if (tmpSegment2d == _segmentTree[i])
                 {
@@ -279,14 +279,14 @@ void SweepLine::scan()
                     break;
                 }
             }
-            if (i == _segmentTree.size())
+            if (i == (int)_segmentTree.size())
                 continue;
 
             auto prevIt = it - 1;
             auto nextIt = it + 1;
 
             // prevIt 和 nextIt 存在
-            if (prevIt != -1 && nextIt != _segmentTree.size())
+            if (prevIt != -1 && nextIt != (int)_segmentTree.size())
                 emplaceCrossPoint(prevIt, nextIt);
 
             _segmentTree.erase(_segmentTree.begin() + it);

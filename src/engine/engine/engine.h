@@ -1,7 +1,7 @@
 #pragma once
 
 #ifdef WINDOWS
-#elif define LINUX
+#elif LINUX
 #endif
 
 #include "core/launch/launch.h"

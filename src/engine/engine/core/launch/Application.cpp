@@ -14,7 +14,7 @@ void zong::Application::Init()
 {
 #ifdef WINDOWS
     ZONG_CORE_TRACE("windows platform");
-#elif define LINUX
+#elif LINUX
     ZONG_CORE_TRACE("linux platform");
 #endif
 
