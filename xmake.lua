@@ -16,7 +16,7 @@ includes("src/engine",
          "src/editor")
 
 if is_mode("debug") and is_plat("windows") then
-        includes("src/test")
+    includes("src/test")
 end
 
 -- global macro defination
