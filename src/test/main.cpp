@@ -1,10 +1,8 @@
-#include <core/geometry/geometry/Point.h>
-#include <core/log/log.h>
+#include <engine/engine.h>
 #include <gtest/gtest.h>
 
 int main()
 {
-    zong::common::Log::init();
     ZONG_CORE_TRACE("start test");
 
     testing::InitGoogleTest();

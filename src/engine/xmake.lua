@@ -1,8 +1,8 @@
 add_defines("ENGINE")
 
 -- includes sub-projects
-includes("src/third_party",
-         "src/core")
+includes("engine/third_party",
+         "engine/core")
 
 target("engine")
     add_deps("third_party", "core")
@@ -11,7 +11,8 @@ target("engine")
     -- add_rules("BuildLibrary")
     -- set_kind("$(kind)")
 
-    add_includedirs("src/", {public = true}) 
+    add_headerfiles("./engine/engine.h")
+    add_includedirs(".", {public = true}) 
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io

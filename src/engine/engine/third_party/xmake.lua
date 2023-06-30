@@ -1,6 +1,6 @@
 add_defines("THIRD_PARTY")
 
-includes("src/third_party_d")
+includes("third_party_d")
 
 target("third_party")
     add_deps("third_party_d")
