@@ -1,11 +1,14 @@
-add_defines("EDITOR")
+add_defines("THIRD_PARTY_D")
 
-target("editor")
-    add_deps("engine")
+add_requires("spdlog 1.11.0")
 
-    set_kind("binary")
-    add_files("src/main.cpp")
+target("third_party_d")
+    add_packages("spdlog", {public = true})
 
+    set_kind("static")
+    
+    --add_includedirs("src/") -- not necessary
+  
 --
 -- If you want to known more usage about xmake, please see https://xmake.io
 --

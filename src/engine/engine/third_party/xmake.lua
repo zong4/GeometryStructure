@@ -1,11 +1,14 @@
-add_defines("EDITOR")
+add_defines("THIRD_PARTY")
 
-target("editor")
-    add_deps("engine")
+includes("third_party_d")
 
-    set_kind("binary")
-    add_files("src/main.cpp")
+target("third_party")
+    add_deps("third_party_d")
+    
+    set_kind("static")
 
+    -- add_includedirs("src/", {public = true}) -- not necessary
+  
 --
 -- If you want to known more usage about xmake, please see https://xmake.io
 --

@@ -1,10 +1,18 @@
-add_defines("EDITOR")
+add_defines("ENGINE")
 
-target("editor")
-    add_deps("engine")
+-- includes sub-projects
+includes("engine/third_party",
+         "engine/core")
 
-    set_kind("binary")
-    add_files("src/main.cpp")
+target("engine")
+    add_deps("third_party", "core")
+
+    set_kind("static")
+    -- add_rules("BuildLibrary")
+    -- set_kind("$(kind)")
+
+    add_headerfiles("./engine/engine.h")
+    add_includedirs(".", {public = true}) 
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io
