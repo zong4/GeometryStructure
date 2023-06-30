@@ -18,5 +18,5 @@ latex/
 # VSCode cache
 .vscode/
 
-# Test code
+# Test code 
 test/
