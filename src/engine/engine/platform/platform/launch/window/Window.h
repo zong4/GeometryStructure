@@ -1,8 +1,6 @@
 #pragma once
 
-#include <core/pch.h>
-
-#include "../../event/Event.h"
+#include <platform/pch.h>
 
 namespace zong
 {

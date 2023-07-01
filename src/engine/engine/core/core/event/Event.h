@@ -2,6 +2,7 @@
 
 #include "EventCategory.h"
 #include "EventType.h"
+#include "core/pch.h"
 
 namespace zong
 {

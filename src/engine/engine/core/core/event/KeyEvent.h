@@ -35,7 +35,7 @@ public:
 #ifdef DEBUG
     inline std::string toString() const override
     {
-        return "KeyPressedEvent: " + std::to_string(static_cast<int>(keyCode())) + " (repeat = " + std::to_string(isRepeat) + ")";
+        return "KeyPressedEvent: " + std::to_string(static_cast<int>(keyCode())) + " (repeat = " + std::to_string(isRepeat()) + ")";
     }
 #endif
 };

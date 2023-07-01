@@ -1,7 +1,5 @@
 #include "Application.h"
 
-#include "../event/ApplicationEvent.h"
-
 void zong::Application::Init()
 {
     ZONG_CORE_TRACE("init engine");
