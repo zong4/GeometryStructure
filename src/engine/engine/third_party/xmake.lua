@@ -1,13 +1,33 @@
 add_defines("THIRD_PARTY")
 
-add_requires("spdlog 1.11.0", "gtest 1.12.1", "opengl", {debug=true})
-add_requires("vulkansdk", "glm", "glfw", "imgui docking")
+-- debug
+add_requires("spdlog 1.11.0", "gtest 1.12.1", {debug=true})
+
+-- vulkun
+add_requires("vulkansdk")
+
+-- opengl
+add_requires("opengl", "glad")
+
+-- linux
+add_requires("glm", "glfw")
+
+-- common
+add_requires("imgui docking")
 
 target("third_party")
-    add_packages("spdlog", "gtest", "opengl", {public = true})
+
+    -- debug
+    add_packages("spdlog", "gtest", {public = true})
+
+    -- vulkun
+    add_packages("vulkansdk", {public = true})
+
+    -- opengl
+    add_packages("opengl", "glad", {public = true})
 
     -- linux
-    add_packages("vulkansdk", "glm", "glfw", {public = true})
+    add_packages("glm", "glfw", {public = true})
 
     -- common
     add_packages("imgui", {public = true})
