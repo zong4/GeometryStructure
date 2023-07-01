@@ -1,11 +1,16 @@
 add_defines("THIRD_PARTY")
 
-add_requires("spdlog 1.11.0", "gtest 1.12.1", {debug=true})
-add_requires("vulkansdk", "glm", "glfw")
+add_requires("spdlog 1.11.0", "gtest 1.12.1", "opengl", {debug=true})
+add_requires("vulkansdk", "glm", "glfw", "imgui docking")
 
 target("third_party")
-    add_packages("spdlog", "gtest", {public = true})
+    add_packages("spdlog", "gtest", "opengl", {public = true})
+
+    -- linux
     add_packages("vulkansdk", "glm", "glfw", {public = true})
+
+    -- common
+    add_packages("imgui", {public = true})
     
     set_kind("static")
 

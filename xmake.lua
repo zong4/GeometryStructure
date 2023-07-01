@@ -4,7 +4,7 @@ set_xmakever("2.7.0")
 set_version("1.0.0", {build = "%Y%m%d%H%M"})
 
 -- set common flags
-set_warnings("all", "error")
+-- set_warnings("all", "error")
 set_languages("c++20")
 add_mxflags("-Wno-error=deprecated-declarations", "-fno-strict-aliasing", "-Wno-error=expansion-to-defined")
 
@@ -34,7 +34,7 @@ else
     -- add macro
     if is_plat("windows") then
         add_defines("WINDOWS")
-        add_ldflags("-subsystem:windows")
+        -- add_ldflags("-subsystem:windows")
     elseif is_plat("linux") then
         add_defines("LINUX")
     end

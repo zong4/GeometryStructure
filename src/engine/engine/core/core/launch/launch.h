@@ -6,7 +6,8 @@
     #ifdef WINDOWS
         #include <windows.h>
 
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow)
+// int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow)
+int main(int argc, char** argv)
 {
     // call the console window
     AllocConsole();

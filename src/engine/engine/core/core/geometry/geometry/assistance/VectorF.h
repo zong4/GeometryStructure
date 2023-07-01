@@ -30,11 +30,7 @@ public:
     inline void setX(double const x) { _xDisplacement = x; }
     inline void setY(double const y) { _yDisplacement = y; }
 
-    inline static bool isEqual(VectorF const& a, VectorF const& b, double const precision)
-    {
-        return util::isEqual(a.x(), b.x(), precision) && util::isEqual(a.y(), b.y(), precision);
-    }
-
+    static bool        isEqual(VectorF const& a, VectorF const& b, double const precision);
     inline static bool isNotEqual(VectorF const& a, VectorF const& b, double const precision) { return !VectorF::isEqual(a, b, precision); }
 
     /**
@@ -49,12 +45,7 @@ public:
      * \param other another VectorF
      * \return VectorF
      */
-    inline VectorF operator+=(VectorF const& other)
-    {
-        setX(x() + other.x());
-        setY(y() + other.y());
-        return *this;
-    }
+    VectorF operator+=(VectorF const& other);
 
     /**
      * \brief VectorF - VectorF = VectorF
@@ -68,20 +59,10 @@ public:
      * \param other another VectorF
      * \return VectorF
      */
-    inline VectorF operator-=(VectorF const& other)
-    {
-        setX(x() - other.x());
-        setY(y() - other.y());
-        return *this;
-    }
+    VectorF operator-=(VectorF const& other);
 
     inline VectorF operator*(double const scale) const { return VectorF(x() * scale, y() * scale); }
-    inline VectorF operator*=(double const scale)
-    {
-        setX(x() * scale);
-        setY(y() * scale);
-        return *this;
-    }
+    VectorF        operator*=(double const scale);
 
     VectorF normalize(double const precision) const;
     double  dot(VectorF const& other) const;

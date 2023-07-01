@@ -26,11 +26,7 @@ public:
     inline void setX(int const x) { _xPosition = x; }
     inline void setY(int const y) { _yPosition = y; }
 
-    inline static bool isEqual(Point const& a, Point const& b, int const precision)
-    {
-        return util::isEqual(a.x(), b.x(), precision) && util::isEqual(a.y(), b.y(), precision);
-    }
-
+    static bool        isEqual(Point const& a, Point const& b, int const precision);
     inline static bool isNotEqual(Point const& a, Point const& b, int const precision) { return !Point::isEqual(a, b, precision); }
 
     /**
@@ -45,12 +41,7 @@ public:
      * \param other another Point
      * \return Point
      */
-    inline Point operator+=(Point const& other)
-    {
-        setX(x() + other.x());
-        setY(y() + other.y());
-        return *this;
-    }
+    Point operator+=(Point const& other);
 
     /**
      * \brief Point + Vector = Point
@@ -74,12 +65,7 @@ public:
     inline Point operator-(Vector const& other) const { return Point(x() - other.x(), y() - other.y()); }
 
     inline Point operator*(int const scale) const { return Point(x() * scale, y() * scale); }
-    inline Point operator*=(int const scale)
-    {
-        setX(x() * scale);
-        setY(y() * scale);
-        return *this;
-    }
+    Point        operator*=(int const scale);
 };
 
 } // namespace zong

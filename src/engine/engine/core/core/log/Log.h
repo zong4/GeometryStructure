@@ -1,9 +1,9 @@
 #pragma once
 
+#include <memory>
+
 #ifdef DEBUG
     #include <spdlog/spdlog.h>
-
-    #include <memory>
 
 namespace zong
 {

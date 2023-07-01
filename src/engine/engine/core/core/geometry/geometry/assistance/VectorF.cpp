@@ -1,5 +1,28 @@
 #include "VectorF.h"
 
+bool zong::VectorF::isEqual(VectorF const& a, VectorF const& b, double const precision)
+{
+    return util::isEqual(a.x(), b.x(), precision) && util::isEqual(a.y(), b.y(), precision);
+}
+
+zong::VectorF zong::VectorF::operator+=(VectorF const& other)
+{
+    *this = *this + other;
+    return *this;
+}
+
+zong::VectorF zong::VectorF::operator-=(VectorF const& other)
+{
+    *this = *this - other;
+    return *this;
+}
+
+zong::VectorF zong::VectorF::operator*=(double const scale)
+{
+    *this = *this * scale;
+    return *this;
+}
+
 // template <util::IsNumber double>
 zong::VectorF zong::VectorF::normalize(double const precision) const
 {
