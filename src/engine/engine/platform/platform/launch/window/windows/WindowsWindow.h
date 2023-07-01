@@ -1,46 +1,50 @@
-// #pragma once
-//
-// #include <core/core.h>
-//
-// namespace zong
-//{
-//
-// class WindowsWindow : public Window
-//{
-// public:
-//     WindowsWindow(const WindowProps& props);
-//     virtual ~WindowsWindow();
-//
-//     void OnUpdate() override;
-//
-//     unsigned int GetWidth() const override { return m_Data.Width; }
-//     unsigned int GetHeight() const override { return m_Data.Height; }
-//
-//     // Window attributes
-//     void SetEventCallback(const EventCallbackFn& callback) override { m_Data.EventCallback = callback; }
-//     void SetVSync(bool enabled) override;
-//     bool IsVSync() const override;
-//
-//     virtual void* GetNativeWindow() const { return m_Window; }
-//
-// private:
-//     virtual void Init(const WindowProps& props);
-//     virtual void Shutdown();
-//
-// private:
-//     GLFWwindow*            m_Window;
-//     Scope<GraphicsContext> m_Context;
-//
-//     struct WindowData
-//     {
-//         std::string  Title;
-//         unsigned int Width, Height;
-//         bool         VSync;
-//
-//         EventCallbackFn EventCallback;
-//     };
-//
-//     WindowData m_Data;
-// };
-//
-// } // namespace zong
+#pragma once
+
+#include <GLFW/glfw3.h>
+
+#include "../Window.h"
+
+namespace zong
+{
+
+class WindowsWindow : public Window
+{
+private:
+    /**
+     * \brief be managed by GLFW
+     */
+    GLFWwindow* _window;
+    bool        _init;
+
+    struct WindowData
+    {
+        std::string  _title;
+        unsigned int _width, _height;
+        bool         _isVSync;
+
+        EventCallbackFn EventCallback;
+
+        WindowData() = default;
+    };
+
+    WindowData _data;
+
+public:
+    WindowsWindow(WindowProps const& props) : Window(), _init(false) { init(props); }
+    virtual ~WindowsWindow() { shutdown(); }
+
+    inline bool         init() const { return _init; }
+    inline unsigned int width() const override { return _data._width; }
+    inline unsigned int height() const override { return _data._height; }
+    inline bool         isVSync() const override { return _data._isVSync; }
+
+    inline void setInit(bool value) { _init = value; }
+    inline void setEventCallback(EventCallbackFn const& callback) override { _data.EventCallback = callback; }
+    void        setVSync(bool enabled) override;
+
+    void init(const WindowProps& props);
+    void update() override;
+    void shutdown();
+};
+
+} // namespace zong

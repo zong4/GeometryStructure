@@ -1,5 +1,8 @@
 #include "Application.h"
 
+#include <GLFW/glfw3.h>
+#include <gl/GL.h>
+
 void zong::Application::Init()
 {
     ZONG_CORE_TRACE("init engine");
@@ -13,16 +16,10 @@ void zong::Application::Init()
 
 void zong::Application::Run()
 {
-    while (true)
+    while (running())
     {
-        WindowResizeEvent e(1280, 720);
-        if (e.isInCategory(EventCategory::EventCategoryApplication))
-        {
-            ZONG_CORE_TRACE(e.toString());
-        }
-        if (e.isInCategory(EventCategory::EventCategoryInput))
-        {
-            ZONG_CORE_INFO(e.toString());
-        }
+        glClearColor(1, 0, 1, 1);
+        glClear(GL_COLOR_BUFFER_BIT);
+        window()->update();
     }
 }

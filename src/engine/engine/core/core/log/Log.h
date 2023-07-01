@@ -37,6 +37,7 @@ public:
      * * ZONG_CORE_WARN: should be solved
      * * ZONG_CORE_ERROR: error
      * * ZONG_CORE_CRITICAL: serious error
+     * * ZONG_CORE_ASSERT: assert
      *
      * client log macros: \n
      * * ZONG_TRACE: basic information
@@ -44,6 +45,7 @@ public:
      * * ZONG_WARN: should be solved
      * * ZONG_ERROR: error
      * * ZONG_CRITICAL: serious error
+     * * ZONG_ASSERT: assert
      */
 
     // core log macros
@@ -52,6 +54,14 @@ public:
     #define ZONG_CORE_WARN(...) zong::Log::coreLogger()->warn(__VA_ARGS__)
     #define ZONG_CORE_ERROR(...) zong::Log::coreLogger()->error(__VA_ARGS__)
     #define ZONG_CORE_CRITICAL(...) zong::Log::coreLogger()->critical(__VA_ARGS__)
+    #define ZONG_CORE_ASSERT(x, ...)                                   \
+        {                                                              \
+            if (!(x))                                                  \
+            {                                                          \
+                ZONG_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); \
+                __debugbreak();                                        \
+            }                                                          \
+        }
 
     // client log macros
     #define ZONG_TRACE(...) zong::Log::clientLogger()->trace(__VA_ARGS__)
@@ -59,6 +69,14 @@ public:
     #define ZONG_WARN(...) zong::Log::clientLogger()->warn(__VA_ARGS__)
     #define ZONG_ERROR(...) zong::Log::clientLogger()->error(__VA_ARGS__)
     #define ZONG_CRITICAL(...) zong::Log::clientLogger()->critical(__VA_ARGS__)
+    #define ZONG_ASSERT(x, ...)                                   \
+        {                                                         \
+            if (!(x))                                             \
+            {                                                     \
+                ZONG_ERROR("Assertion Failed: {0}", __VA_ARGS__); \
+                __debugbreak();                                   \
+            }                                                     \
+        }
 #elif RELEASE
 // core log macros
     #define ZONG_CORE_TRACE(...)
@@ -66,6 +84,7 @@ public:
     #define ZONG_CORE_WARN(...)
     #define ZONG_CORE_ERROR(...)
     #define ZONG_CORE_CRITICAL(...)
+    #define ZONG_CORE_ASSERT(x, ...)
 
     // client log macros
     #define ZONG_TRACE(...)
@@ -73,6 +92,7 @@ public:
     #define ZONG_WARN(...)
     #define ZONG_ERROR(...)
     #define ZONG_CRITICAL(...)
+    #define ZONG_ASSERT(x, ...)
 #endif
 
 /** @} */

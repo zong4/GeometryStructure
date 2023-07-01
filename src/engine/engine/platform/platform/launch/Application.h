@@ -13,11 +13,15 @@ namespace zong
 class Application
 {
 private:
-    static std::unique_ptr<Window> _window;
+    bool                    _running;
+    std::unique_ptr<Window> _window;
 
 public:
-    Application() {}
+    Application() : _running(true), _window(Window::create()) {}
     virtual ~Application() {}
+
+    inline bool                           running() const { return _running; }
+    inline std::unique_ptr<Window> const& window() const { return _window; }
 
     void Init();
     void Run();
