@@ -1,11 +1,9 @@
-add_defines("CORE")
+add_defines("FUNCTION")
 
-add_requires("spdlog 1.11.0", {debug=true})
+target("function")
+    add_deps("core", "platform")
 
-target("core")
-    add_packages("spdlog", {public = true}) 
-
-    set_pcxxheader("core/pch.h")
+    set_pcxxheader("function/pch.h")
     add_files("./**/*.cpp")
     add_headerfiles("./**/*.h")
     add_includedirs(".", {public = true}) 

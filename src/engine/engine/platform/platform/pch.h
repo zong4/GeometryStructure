@@ -4,4 +4,4 @@
 #elif LINUX
 #endif
 
-#include <platform/platform.h>
+#include <core/core.h>

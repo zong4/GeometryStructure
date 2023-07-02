@@ -8,14 +8,14 @@
 #include <iostream>
 #include <vector>
 
-class Editor : public zong::Application
+class Editor : public zong::platform::Application
 {
 public:
     Editor() {}
     ~Editor() {}
 };
 
-std::unique_ptr<zong::Application> zong::CreateApplication()
+std::unique_ptr<zong::platform::Application> zong::platform::CreateApplication()
 {
     return std::make_unique<Editor>();
 }
