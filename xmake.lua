@@ -17,6 +17,9 @@ includes("src/engine")
 -- choose test or not
 isTest = false; 
 
+-- choose no linux
+isNoLinux = true;
+
 if isTest then
     add_defines("TEST")
     add_defines("DEBUG")
@@ -32,11 +35,15 @@ else
     end
 
     -- add macro
-    if is_plat("windows") then
+    if isNoLinux then 
         add_defines("WINDOWS")
-        -- add_ldflags("-subsystem:windows")
-    elseif is_plat("linux") then
-        add_defines("LINUX")
+    else
+        if is_plat("windows") then
+            add_defines("WINDOWS")
+            add_ldflags("-subsystem:windows")
+        elseif is_plat("linux") then
+            add_defines("LINUX")
+        end
     end
 end
 

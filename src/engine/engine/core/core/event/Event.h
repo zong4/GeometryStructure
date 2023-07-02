@@ -6,6 +6,8 @@
 
 namespace zong
 {
+namespace core
+{
 
 class Event
 {
@@ -13,16 +15,17 @@ private:
     bool _handled;
 
 public:
-    Event() : _handled(false) {}
-    virtual ~Event() = default;
-
     inline bool handled() const { return _handled; }
+
+    inline void setHandled(bool const value) { _handled = value; }
 
     virtual EventType     eventType() const    = 0;
     virtual std::string   name() const         = 0;
     virtual EventCategory categoryFlag() const = 0;
 
-    inline void setHandled(bool const value) { _handled = value; }
+public:
+    Event() : _handled(false) {}
+    virtual ~Event() = default;
 
     virtual bool isInCategory(EventCategory const category) const { return categoryFlag() & category; }
 
@@ -31,6 +34,7 @@ public:
 #endif
 };
 
+} // namespace core
 } // namespace zong
 
 #define EVENT_CLASS_TYPE(type)                   \

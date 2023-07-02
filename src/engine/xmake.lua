@@ -1,12 +1,13 @@
 add_defines("ENGINE")
 
 -- includes sub-projects
-includes("engine/third_party",
-         "engine/core",
-         "engine/platform")
+includes("engine/core",
+         "engine/platform",
+         "engine/function"
+         )
 
 target("engine")
-    add_deps("third_party", "core", "platform")
+    add_deps("core", "platform", "function")
 
     set_kind("static")
     -- add_rules("BuildLibrary")

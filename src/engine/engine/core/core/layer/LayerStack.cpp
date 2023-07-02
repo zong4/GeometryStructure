@@ -1,6 +1,6 @@
 #include "LayerStack.h"
 
-zong::LayerStack::~LayerStack()
+zong::core::LayerStack::~LayerStack()
 {
     for (Layer* layer : _layers)
     {
@@ -9,18 +9,18 @@ zong::LayerStack::~LayerStack()
     }
 }
 
-void zong::LayerStack::pushLayer(Layer* layer)
+void zong::core::LayerStack::pushLayer(Layer* layer)
 {
     _layers.emplace(_layers.begin() + _layerInsertIndex, layer);
     ++_layerInsertIndex;
 }
 
-void zong::LayerStack::pushOverlay(Layer* overlay)
+void zong::core::LayerStack::pushOverlay(Layer* overlay)
 {
     _layers.emplace_back(overlay);
 }
 
-void zong::LayerStack::popLayer(Layer* layer)
+void zong::core::LayerStack::popLayer(Layer* layer)
 {
     auto const it = std::find(_layers.begin(), _layers.begin() + _layerInsertIndex, layer);
 
@@ -32,7 +32,7 @@ void zong::LayerStack::popLayer(Layer* layer)
     }
 }
 
-void zong::LayerStack::popOverlay(Layer* overlay)
+void zong::core::LayerStack::popOverlay(Layer* overlay)
 {
     auto const it = std::find(_layers.begin() + _layerInsertIndex, _layers.end(), overlay);
 

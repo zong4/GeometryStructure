@@ -4,6 +4,8 @@
 
 namespace zong
 {
+namespace core
+{
 
 /**
  * \brief events in here are currently blocking, meaning when an event occurs it
@@ -32,4 +34,5 @@ public:
     }
 };
 
+} // namespace core
 } // namespace zong

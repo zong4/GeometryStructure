@@ -2,6 +2,9 @@
 
 namespace zong
 {
+namespace core
+{
+
 enum class EventType : int
 {
     None = 0,
@@ -21,4 +24,6 @@ enum class EventType : int
     MouseMoved,
     MouseScrolled
 };
+
+}
 } // namespace zong

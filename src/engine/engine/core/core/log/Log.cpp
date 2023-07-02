@@ -4,10 +4,24 @@
     #include <spdlog/sinks/basic_file_sink.h>
     #include <spdlog/sinks/stdout_color_sinks.h>
 
-std::shared_ptr<spdlog::logger> zong::Log::_coreLogger   = nullptr;
-std::shared_ptr<spdlog::logger> zong::Log::_clientLogger = nullptr;
+std::shared_ptr<spdlog::logger> zong::core::Log::_coreLogger   = nullptr;
+std::shared_ptr<spdlog::logger> zong::core::Log::_clientLogger = nullptr;
 
-void zong::Log::init()
+const std::shared_ptr<spdlog::logger>& zong::core::Log::coreLogger()
+{
+    if (!_coreLogger)
+        init();
+    return Log::_coreLogger;
+}
+
+const std::shared_ptr<spdlog::logger>& zong::core::Log::clientLogger()
+{
+    if (!_clientLogger)
+        init();
+    return Log::_clientLogger;
+}
+
+void zong::core::Log::init()
 {
     if (_coreLogger || _clientLogger)
     {
@@ -31,20 +45,6 @@ void zong::Log::init()
     spdlog::register_logger(_clientLogger);
     Log::_clientLogger->set_level(spdlog::level::trace);
     Log::_clientLogger->flush_on(spdlog::level::trace);
-}
-
-const std::shared_ptr<spdlog::logger>& zong::Log::coreLogger()
-{
-    if (!_coreLogger)
-        init();
-    return Log::_coreLogger;
-}
-
-const std::shared_ptr<spdlog::logger>& zong::Log::clientLogger()
-{
-    if (!_clientLogger)
-        init();
-    return Log::_clientLogger;
 }
 
 #endif

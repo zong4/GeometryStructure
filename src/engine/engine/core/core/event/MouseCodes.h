@@ -4,6 +4,8 @@
 
 namespace zong
 {
+namespace core
+{
 
 // copy from glfw3.h
 enum class MouseCode : uint16_t
@@ -23,4 +25,5 @@ enum class MouseCode : uint16_t
     ButtonMiddle = Button2
 };
 
+} // namespace core
 } // namespace zong

@@ -4,6 +4,8 @@
 
 namespace zong
 {
+namespace core
+{
 
 class WindowResizeEvent : public Event
 {
@@ -11,10 +13,11 @@ private:
     unsigned int _width, _height;
 
 public:
-    WindowResizeEvent(unsigned int width, unsigned int height) : Event(), _width(width), _height(height) {}
-
     unsigned int width() const { return _width; }
     unsigned int height() const { return _height; }
+
+public:
+    WindowResizeEvent(unsigned int width, unsigned int height) : Event(), _width(width), _height(height) {}
 
     EVENT_CLASS_TYPE(WindowResize)
     EVENT_CLASS_CATEGORY(EventCategory::EventCategoryApplication)
@@ -62,4 +65,6 @@ public:
     EVENT_CLASS_TYPE(AppRender)
     EVENT_CLASS_CATEGORY(EventCategory::EventCategoryApplication)
 };
+
+} // namespace core
 } // namespace zong

@@ -7,6 +7,8 @@
 
 namespace zong
 {
+namespace core
+{
 
 /// <summary>
 /// two loggers has different name, one is for core, and another is for editor
@@ -18,15 +20,17 @@ private:
     static std::shared_ptr<spdlog::logger> _clientLogger;
 
 public:
+    static const std::shared_ptr<spdlog::logger>& coreLogger();
+    static const std::shared_ptr<spdlog::logger>& clientLogger();
+
+public:
     /// <summary>
     /// init loggers with two names, and set log filename
     /// </summary>
     static void init();
-
-    static const std::shared_ptr<spdlog::logger>& coreLogger();
-    static const std::shared_ptr<spdlog::logger>& clientLogger();
 };
 
+} // namespace core
 } // namespace zong
 
     /**
@@ -49,11 +53,11 @@ public:
      */
 
     // core log macros
-    #define ZONG_CORE_TRACE(...) zong::Log::coreLogger()->trace(__VA_ARGS__)
-    #define ZONG_CORE_INFO(...) zong::Log::coreLogger()->info(__VA_ARGS__)
-    #define ZONG_CORE_WARN(...) zong::Log::coreLogger()->warn(__VA_ARGS__)
-    #define ZONG_CORE_ERROR(...) zong::Log::coreLogger()->error(__VA_ARGS__)
-    #define ZONG_CORE_CRITICAL(...) zong::Log::coreLogger()->critical(__VA_ARGS__)
+    #define ZONG_CORE_TRACE(...) zong::core::Log::coreLogger()->trace(__VA_ARGS__)
+    #define ZONG_CORE_INFO(...) zong::core::Log::coreLogger()->info(__VA_ARGS__)
+    #define ZONG_CORE_WARN(...) zong::core::Log::coreLogger()->warn(__VA_ARGS__)
+    #define ZONG_CORE_ERROR(...) zong::core::Log::coreLogger()->error(__VA_ARGS__)
+    #define ZONG_CORE_CRITICAL(...) zong::core::Log::coreLogger()->critical(__VA_ARGS__)
     #define ZONG_CORE_ASSERT(x, ...)                                   \
         {                                                              \
             if (!(x))                                                  \
@@ -64,11 +68,11 @@ public:
         }
 
     // client log macros
-    #define ZONG_TRACE(...) zong::Log::clientLogger()->trace(__VA_ARGS__)
-    #define ZONG_INFO(...) zong::Log::clientLogger()->info(__VA_ARGS__)
-    #define ZONG_WARN(...) zong::Log::clientLogger()->warn(__VA_ARGS__)
-    #define ZONG_ERROR(...) zong::Log::clientLogger()->error(__VA_ARGS__)
-    #define ZONG_CRITICAL(...) zong::Log::clientLogger()->critical(__VA_ARGS__)
+    #define ZONG_TRACE(...) zong::core::Log::clientLogger()->trace(__VA_ARGS__)
+    #define ZONG_INFO(...) zong::core::Log::clientLogger()->info(__VA_ARGS__)
+    #define ZONG_WARN(...) zong::core::Log::clientLogger()->warn(__VA_ARGS__)
+    #define ZONG_ERROR(...) zong::core::Log::clientLogger()->error(__VA_ARGS__)
+    #define ZONG_CRITICAL(...) zong::core::Log::clientLogger()->critical(__VA_ARGS__)
     #define ZONG_ASSERT(x, ...)                                   \
         {                                                         \
             if (!(x))                                             \

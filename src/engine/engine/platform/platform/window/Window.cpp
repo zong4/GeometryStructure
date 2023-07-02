@@ -6,7 +6,7 @@
     #include "./linux/LinuxWindow.h"
 #endif
 
-std::unique_ptr<zong::Window> zong::Window::create(WindowProps const& props)
+std::unique_ptr<zong::platform::Window> zong::platform::Window::create(WindowProps const& props)
 {
 #ifdef WINDOWS
     return std::make_unique<WindowsWindow>(props);

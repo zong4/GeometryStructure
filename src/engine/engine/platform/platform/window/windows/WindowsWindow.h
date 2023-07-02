@@ -6,6 +6,8 @@
 
 namespace zong
 {
+namespace platform
+{
 
 class WindowsWindow : public Window
 {
@@ -47,4 +49,5 @@ public:
     void shutdown();
 };
 
+} // namespace platform
 } // namespace zong

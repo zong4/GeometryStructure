@@ -1,6 +1,6 @@
 #include "WindowsWindow.h"
 
-void zong::WindowsWindow::setVSync(bool enabled)
+void zong::platform::WindowsWindow::setVSync(bool enabled)
 {
     if (enabled)
         glfwSwapInterval(1);
@@ -10,7 +10,7 @@ void zong::WindowsWindow::setVSync(bool enabled)
     _data._isVSync = enabled;
 }
 
-void zong::WindowsWindow::init(WindowProps const& props)
+void zong::platform::WindowsWindow::init(WindowProps const& props)
 {
     _data._title  = props._title;
     _data._width  = props._width;
@@ -35,13 +35,13 @@ void zong::WindowsWindow::init(WindowProps const& props)
     setVSync(true);
 }
 
-void zong::WindowsWindow::update()
+void zong::platform::WindowsWindow::update()
 {
     glfwPollEvents();
     glfwSwapBuffers(_window);
 }
 
-void zong::WindowsWindow::shutdown()
+void zong::platform::WindowsWindow::shutdown()
 {
     glfwDestroyWindow(_window);
     if (_window)

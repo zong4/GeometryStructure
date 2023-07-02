@@ -2,9 +2,11 @@
 
 #include <platform/pch.h>
 
-#include "window/Window.h"
+#include "../window/Window.h"
 
 namespace zong
+{
+namespace platform
 {
 
 /**
@@ -30,4 +32,5 @@ public:
 //  be defined in client
 std::unique_ptr<Application> CreateApplication();
 
+} // namespace platform
 } // namespace zong

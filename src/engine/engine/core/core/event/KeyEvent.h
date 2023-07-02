@@ -5,18 +5,21 @@
 
 namespace zong
 {
+namespace core
+{
 
 class KeyEvent : public Event
 {
 private:
     KeyCode _keyCode;
 
+public:
+    inline KeyCode keyCode() const { return _keyCode; }
+
 protected:
     KeyEvent(KeyCode const keycode) : Event(), _keyCode(keycode) {}
 
 public:
-    inline KeyCode keyCode() const { return _keyCode; }
-
     EVENT_CLASS_CATEGORY(static_cast<EventCategory>(EventCategory::EventCategoryKeyboard | EventCategory::EventCategoryInput))
 };
 
@@ -26,9 +29,10 @@ private:
     bool _isRepeat;
 
 public:
-    KeyPressedEvent(KeyCode const keycode, bool isRepeat = false) : KeyEvent(keycode), _isRepeat(isRepeat) {}
-
     bool isRepeat() const { return _isRepeat; }
+
+public:
+    KeyPressedEvent(KeyCode const keycode, bool isRepeat = false) : KeyEvent(keycode), _isRepeat(isRepeat) {}
 
     EVENT_CLASS_TYPE(KeyPressed)
 
@@ -63,4 +67,6 @@ public:
     inline std::string toString() const override { return "KeyTypedEvent: " + std::to_string(static_cast<int>(keyCode())); }
 #endif
 };
+
+} // namespace core
 } // namespace zong

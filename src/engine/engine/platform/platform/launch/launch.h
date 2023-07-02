@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Application.h"
+#include "../application/Application.h"
 
 #ifndef TEST
     #ifdef WINDOWS
@@ -12,7 +12,7 @@ int main(int argc, char** argv)
     // call the console window
     AllocConsole();
 
-    auto const app = zong::CreateApplication();
+    auto const app = zong::platform::CreateApplication();
 
     app->Init();
     app->Run();
@@ -24,7 +24,7 @@ int main(int argc, char** argv)
 
 int main(int argc, char** argv)
 {
-    auto const app = zong::CreateApplication();
+    auto const app = zong::platform::CreateApplication();
 
     app->Init();
     app->Run();

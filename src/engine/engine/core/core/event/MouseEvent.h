@@ -5,6 +5,8 @@
 
 namespace zong
 {
+namespace core
+{
 
 class MouseMovedEvent : public Event
 {
@@ -31,10 +33,11 @@ private:
     float _xOffset, _yOffset;
 
 public:
-    MouseScrolledEvent(float const xOffset, float const yOffset) : Event(), _xOffset(xOffset), _yOffset(yOffset) {}
-
     inline float xOffset() const { return _xOffset; }
     inline float yOffset() const { return _yOffset; }
+
+public:
+    MouseScrolledEvent(float const xOffset, float const yOffset) : Event(), _xOffset(xOffset), _yOffset(yOffset) {}
 
     EVENT_CLASS_TYPE(MouseScrolled)
     EVENT_CLASS_CATEGORY(static_cast<EventCategory>(EventCategory::EventCategoryMouse | EventCategory::EventCategoryInput))
@@ -52,12 +55,13 @@ class MouseButtonEvent : public Event
 private:
     MouseCode _button;
 
+public:
+    inline MouseCode button() const { return _button; }
+
 protected:
     MouseButtonEvent(const MouseCode button) : Event(), _button(button) {}
 
 public:
-    inline MouseCode button() const { return _button; }
-
     EVENT_CLASS_CATEGORY(static_cast<EventCategory>(EventCategory::EventCategoryMouse |
                                                     (EventCategory::EventCategoryInput | EventCategory::EventCategoryMouseButton)))
 };
@@ -86,4 +90,5 @@ public:
 #endif
 };
 
+} // namespace core
 } // namespace zong

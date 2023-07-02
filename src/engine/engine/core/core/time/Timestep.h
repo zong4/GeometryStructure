@@ -2,9 +2,11 @@
 
 namespace zong
 {
+namespace core
+{
 
 /**
- * \brief time step
+ * \brief time step, use to fix update
  */
 class Timestep
 {
@@ -21,4 +23,5 @@ public:
     // operator float() const { return _time; }
 };
 
+} // namespace core
 } // namespace zong

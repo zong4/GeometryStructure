@@ -4,6 +4,8 @@
 
 namespace zong
 {
+namespace platform
+{
 
 struct WindowProps
 {
@@ -24,7 +26,7 @@ class Window
 {
 private:
 public:
-    using EventCallbackFn = std::function<void(Event&)>;
+    using EventCallbackFn = std::function<void(core::Event&)>;
 
     Window()          = default;
     virtual ~Window() = default;
@@ -46,4 +48,5 @@ public:
     static std::unique_ptr<Window> create(WindowProps const& props = WindowProps());
 };
 
+} // namespace platform
 } // namespace zong

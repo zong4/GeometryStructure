@@ -4,6 +4,8 @@
 
 namespace zong
 {
+namespace core
+{
 
 enum class EventCategory : int
 {
@@ -35,4 +37,5 @@ inline int operator&(EventCategory const value1, EventCategory const value2)
     return static_cast<int>(value1) & static_cast<int>(value2);
 }
 
+} // namespace core
 } // namespace zong

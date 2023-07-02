@@ -6,6 +6,8 @@
 
 namespace zong
 {
+namespace core
+{
 
 class Layer
 {
@@ -13,17 +15,19 @@ private:
     std::string _name;
 
 public:
+    inline std::string name() const { return _name; }
+
+public:
     Layer(std::string const& name = "Layer") : _name(name) {}
     virtual ~Layer() = default;
-
-    inline std::string name() const { return _name; }
 
     virtual void onAttach() = 0;
     virtual void onDetach() = 0;
 
-    virtual void onUpdate(Timestep const& ts) = 0;
-    virtual void onImGuiRender()              = 0;
-    virtual void onEvent(Event& event)        = 0;
+    virtual void onUpdate(Timestep const& ts) {}
+    virtual void onImGuiRender() {}
+    virtual void onEvent(Event& event) {}
 };
 
+} // namespace core
 } // namespace zong

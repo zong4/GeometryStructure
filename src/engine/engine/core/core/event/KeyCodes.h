@@ -4,6 +4,8 @@
 
 namespace zong
 {
+namespace core
+{
 
 // copy from glfw3.h
 enum class KeyCode : uint16_t
@@ -140,4 +142,5 @@ enum class KeyCode : uint16_t
     Menu         = 348
 };
 
+} // namespace core
 } // namespace zong

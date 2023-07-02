@@ -3,7 +3,7 @@
 #include <GLFW/glfw3.h>
 #include <gl/GL.h>
 
-void zong::Application::Init()
+void zong::platform::Application::Init()
 {
     ZONG_CORE_TRACE("init engine");
 
@@ -14,7 +14,7 @@ void zong::Application::Init()
 #endif
 }
 
-void zong::Application::Run()
+void zong::platform::Application::Run()
 {
     while (running())
     {
