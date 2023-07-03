@@ -1,6 +1,6 @@
 add_defines("CORE")
 
-add_requires("spdlog 1.11.0", {debug=true})
+add_requires("spdlog 1.11.0", {debug = true})
 
 target("core")
     add_packages("spdlog", {public = true}) 

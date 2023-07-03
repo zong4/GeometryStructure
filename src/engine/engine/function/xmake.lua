@@ -1,7 +1,11 @@
 add_defines("FUNCTION")
 
+
+
 target("function")
     add_deps("core", "platform")
+
+    
 
     set_pcxxheader("function/pch.h")
     add_files("./**/*.cpp")

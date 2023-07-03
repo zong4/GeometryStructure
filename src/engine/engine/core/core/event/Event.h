@@ -30,7 +30,7 @@ public:
     virtual bool isInCategory(EventCategory const category) const { return categoryFlag() & category; }
 
 #ifdef DEBUG
-    inline virtual std::string toString() const { return "EventName: " + name(); }
+    virtual std::string toString() const { return "EventName: " + name(); }
 #endif
 };
 

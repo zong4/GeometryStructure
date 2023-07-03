@@ -25,7 +25,7 @@ public:
     template <typename T, typename F>
     inline bool dispatch(F const& func)
     {
-        if (_event.eventType() == T::GetStaticType())
+        if (_event.eventType() == T::staticType())
         {
             _event.setHandled(_event.handled() | func(static_cast<T&>(_event)));
             return true;
@@ -36,3 +36,5 @@ public:
 
 } // namespace core
 } // namespace zong
+
+#define ZONG_BIND_EVENT_FN(fn) [this](auto&&... args) -> decltype(auto) { return this->fn(std::forward<decltype(args)>(args)...); }

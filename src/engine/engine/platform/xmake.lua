@@ -9,8 +9,9 @@ add_requires("opengl", "glad")
 -- linux
 add_requires("glm", "glfw")
 
--- common
-add_requires("imgui docking", "imguizmo")
+add_requires("imgui docking", "imguizmo", "stb")
+
+add_requires("shaderc","spirv-cross", {configs = {vs_runtime = "MT"}})
 
 target("platform")
     add_deps("core")
@@ -19,13 +20,12 @@ target("platform")
     add_packages("vulkansdk")
 
     -- opengl
-    add_packages("opengl", "glad")
+    add_packages("opengl")
 
     -- linux
-    add_packages("glm", "glfw")
+    add_packages("glm", "glfw", "glad", "shaderc", "spirv-cross", {public = true}) 
 
-    -- common
-    add_packages("imgui", "imguizmo")
+    add_packages("imgui", "imguizmo", "stb", {public = true}) 
 
     set_pcxxheader("platform/pch.h")
     add_files("./**/*.cpp")

@@ -51,7 +51,7 @@ struct Buffer
     operator bool() const { return static_cast<bool>(_data); }
 };
 
-struct ScopedBuffer
+struct std::unique_ptrdBuffer
 {
 private:
     Buffer _buffer;
@@ -61,9 +61,9 @@ public:
     uint64_t Size() { return _buffer._size; }
 
 public:
-    ScopedBuffer(Buffer buffer) : _buffer(buffer) {}
-    ScopedBuffer(uint64_t size) : _buffer(size) {}
-    ~ScopedBuffer() { _buffer.release(); }
+    std::unique_ptrdBuffer(Buffer buffer) : _buffer(buffer) {}
+    std::unique_ptrdBuffer(uint64_t size) : _buffer(size) {}
+    ~std::unique_ptrdBuffer() { _buffer.release(); }
 
     template <typename T>
     T* as()
