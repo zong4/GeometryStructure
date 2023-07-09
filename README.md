@@ -3,3 +3,5 @@
 It's departed from the Engine core layer, so you need write yourself main file.
 
 However, there still has lot need be optimized in SweepLine.
+
+It's not complete, just a structure, which may help you build your basic geometry structure.
