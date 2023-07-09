@@ -20,3 +20,6 @@ latex/
 
 # Test code 
 test/
+
+# Log cache
+*.log
