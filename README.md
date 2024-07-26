@@ -8,6 +8,6 @@ It's different from main stream structure and I think it's more mathmatical.
 
 ## Include
 
-To see [the method to hide the bottom implementation details](https://github.com/zong4/Cpp_Character/tree/main/structure/geometry).
+You may want to see [the method to hide the bottom implementation details](https://github.com/zong4/Cpp_Character/tree/main/structure/geometry).
 
-To see [the structure of geometry intersection](https://github.com/zong4/Cpp_Character/tree/main/structure/geometry_intersection). 
+You may want to see [the structure of geometry intersection](https://github.com/zong4/Cpp_Character/tree/main/structure/geometry_intersection). 
